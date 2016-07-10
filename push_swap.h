@@ -17,4 +17,10 @@ typedef	struct 		t_shell
 	struct t_stack	*stackB;
 }					s_shell;
 
+
+/*
+**	Listwise functions
+*/
+int					stack_list_len(s_stack *head);
+
 #endif

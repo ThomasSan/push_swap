@@ -1,6 +1,19 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+int		stack_list_len(s_stack *head)
+{
+	int i;
+
+	i = 0;
+	while (head)
+	{
+		head = head->next;
+		i++;
+	}
+	return (i);
+}
+
 s_stack	*push_back_stack(s_stack *head, char *s)
 {
 	s_stack	*tmp;
@@ -24,13 +37,36 @@ s_stack	*push_back_stack(s_stack *head, char *s)
 	return (head);
 }
 
+s_stack	*push_front_stack(s_stack *head, char *s)
+{
+	s_stack	*tmp;
+	s_stack	*new;
+
+	tmp = head;
+	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
+		return (NULL);
+	new->next = NULL;
+	new->prev = NULL;
+	new->nb = ft_atoi(s);
+	if (tmp == NULL)
+		head = new;
+	else
+	{
+		new->next = head;
+		head->prev = new;
+		head = new;
+	}
+	return (head);
+}
+
 void	show_list(s_stack *head)
 {
 	while (head)
 	{
-		printf("%d\n", head->nb);
+		printf("%d ", head->nb);
 		head = head->next;
 	}
+	printf("\n");
 }
 
 int		main(int argc, char **argv)
@@ -46,6 +82,9 @@ int		main(int argc, char **argv)
 	head->stackA = NULL;
 	head->stackB = NULL;
 	while (argv[++i])
-		head->stackA = push_back_stack(head->stackA, argv[i]);
+		head->stackA = push_front_stack(head->stackA, argv[i]);
+	show_list(head->stackA);
 	return (0);
 }
+
+//Ajouter un checker pour les non digits !
