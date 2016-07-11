@@ -22,5 +22,11 @@ typedef	struct 		t_shell
 **	Listwise functions
 */
 int					stack_list_len(s_stack *head);
+/*
+**	Basics operations
+*/
+int					ft_sa(s_stack *head);
+int					ft_sb(s_stack *head);
+int					ft_ss(s_stack *hA, s_stack *hB);
 
 #endif
