@@ -37,7 +37,7 @@ s_stack	*push_back_stack(s_stack *head, char *s)
 	return (head);
 }
 
-s_stack	*push_front_stack(s_stack *head, char *s)
+s_stack	*push_front_stack(s_stack *head, int i)
 {
 	s_stack	*tmp;
 	s_stack	*new;
@@ -47,7 +47,7 @@ s_stack	*push_front_stack(s_stack *head, char *s)
 		return (NULL);
 	new->next = NULL;
 	new->prev = NULL;
-	new->nb = ft_atoi(s);
+	new->nb = i;
 	if (tmp == NULL)
 		head = new;
 	else
@@ -61,6 +61,8 @@ s_stack	*push_front_stack(s_stack *head, char *s)
 
 void	show_list(s_stack *head)
 {
+	if (head == NULL)
+		printf("Is empty");
 	while (head)
 	{
 		printf("%d ", head->nb);
@@ -82,8 +84,12 @@ int		main(int argc, char **argv)
 	head->stackA = NULL;
 	head->stackB = NULL;
 	while (argv[++i])
-		head->stackA = push_front_stack(head->stackA, argv[i]);
+		head->stackA = push_front_stack(head->stackA, ft_atoi(argv[i]));
 	show_list(head->stackA);
+	show_list(head->stackB);
+	ft_push(head->stackA, head->stackB);
+	show_list(head->stackA);
+	show_list(head->stackB);
 	return (0);
 }
 
