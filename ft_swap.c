@@ -18,22 +18,22 @@ int			swap_list(s_stack *head)
 	return (1);
 }
 
-int			ft_sa(s_stack *head)
+int			ft_sa(s_shell *head)
 {
-	return (swap_list(head));
+	return (swap_list(head->stackA));
 }
 
-int			ft_sb(s_stack *head)
+int			ft_sb(s_shell *head)
 {
-	return (swap_list(head));
+	return (swap_list(head->stackB));
 }
 
-int			ft_ss(s_stack *headA, s_stack *headB)
+int			ft_ss(s_shell *head)
 {
 	int		x;
 	int		y;
 			
-	x = swap_list(headA);
-	y = swap_list(headB);
+	x = swap_list(head->stackA);
+	y = swap_list(head->stackB);
 	return (x + y);
 }

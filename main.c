@@ -59,14 +59,25 @@ s_stack	*push_front_stack(s_stack *head, int i)
 	return (head);
 }
 
-void	show_list(s_stack *head)
+void	show_list(s_shell *head)
 {
-	if (head == NULL)
-		printf("Is empty");
-	while (head)
+	s_stack *tmpA = head->stackA;
+	s_stack *tmpB = head->stackB;
+
+	if (tmpA == NULL)
+		printf("A is empty\n");
+	while (tmpA)
 	{
-		printf("%d ", head->nb);
-		head = head->next;
+		printf("A:%d ", tmpA->nb);
+		tmpA = tmpA->next;
+	}
+	printf("\n");
+	if (tmpB == NULL)
+		printf("B is empty\n");
+	while (tmpB)
+	{
+		printf("B:%d", tmpB->nb);
+		tmpB = tmpB->next;
 	}
 	printf("\n");
 }
@@ -85,11 +96,11 @@ int		main(int argc, char **argv)
 	head->stackB = NULL;
 	while (argv[++i])
 		head->stackA = push_front_stack(head->stackA, ft_atoi(argv[i]));
-	show_list(head->stackA);
-	show_list(head->stackB);
-	ft_push(head->stackA, head->stackB);
-	show_list(head->stackA);
-	show_list(head->stackB);
+	show_list(head);
+	ft_pushB(head);
+	ft_pushB(head);
+	ft_sa(head);
+	show_list(head);
 	return (0);
 }
 

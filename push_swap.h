@@ -26,9 +26,13 @@ s_stack				*push_front_stack(s_stack *head, int i);
 /*
 **	Basics operations
 */
-int					ft_sa(s_stack *head);
-int					ft_sb(s_stack *head);
-int					ft_ss(s_stack *hA, s_stack *hB);
-int					ft_push(s_stack *src, s_stack *dst);
+int					ft_sa(s_shell *head);
+int					ft_sb(s_shell *head);
+int					ft_ss(s_shell *head);
+int					ft_push(s_shell *head);
 
+/*
+**	Debug functions
+*/
+void				show_list(s_shell *head);
 #endif
