@@ -14,7 +14,7 @@ int		stack_list_len(s_stack *head)
 	return (i);
 }
 
-s_stack	*push_back_stack(s_stack *head, char *s)
+s_stack	*push_back_stack(s_stack *head, int i)
 {
 	s_stack	*tmp;
 	s_stack	*new;
@@ -24,7 +24,7 @@ s_stack	*push_back_stack(s_stack *head, char *s)
 		return (NULL);
 	new->next = NULL;
 	new->prev = NULL;
-	new->nb = ft_atoi(s);
+	new->nb = i;
 	if (tmp == NULL)
 		head = new;
 	else
@@ -95,11 +95,17 @@ int		main(int argc, char **argv)
 	head->stackA = NULL;
 	head->stackB = NULL;
 	while (argv[++i])
-		head->stackA = push_front_stack(head->stackA, ft_atoi(argv[i]));
+		head->stackA = push_back_stack(head->stackA, ft_atoi(argv[i]));
 	show_list(head);
 	ft_pushB(head);
 	ft_pushB(head);
-	ft_sa(head);
+	show_list(head);
+	ft_pushA(head);
+	ft_pushA(head);
+	// ft_sa(head);
+	show_list(head);
+	rrA(head);
+	// rotateA(head);
 	show_list(head);
 	return (0);
 }
