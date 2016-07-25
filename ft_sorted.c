@@ -5,7 +5,7 @@ int		ft_sorted(s_stack *head)
 	s_stack *tmp;
 
 	tmp = head->next;
-	while (tmp->next)
+	while (tmp)
 	{
 		if (head->nb > tmp->nb)
 			return (0);
@@ -20,7 +20,7 @@ int		ft_rev_sorted(s_stack *head)
 	s_stack *tmp;
 
 	tmp = head->next;
-	while (tmp->next)
+	while (tmp)
 	{
 		if (head->nb < tmp->nb)
 			return (0);

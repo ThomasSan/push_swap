@@ -8,6 +8,8 @@ int		main(int argc, char **argv)
 	i = 0;
 	if (argc == 1)
 		return (0);
+	if (argc == 2)
+		ft_strsplit(argv[1], ' ');
 	if (!(head = (s_shell*)malloc(sizeof(s_shell*))))
 		return (0);
 	head->stackA = NULL;
@@ -23,16 +25,11 @@ int		main(int argc, char **argv)
 		head->max = ft_atoi(argv[i]) > head->max ? ft_atoi(argv[i]) : head->max;
 	}
 	show_list(head);
-	ft_pushB(head);
-	ft_sa(head);
-	rrA(head);
-	rrA(head);
-	ft_sa(head);
-	rotateA(head);
-	ft_pushA(head);
+	while (ft_sorted(head->stackA) == 0)
+		push_swap(head);
 	show_list(head);
-	printf("min : %d max : %d\n", head->min, head->max);
 	return (0);
 }
 
 // dans error verifier le plus petit int
+// utiliser les min - max pour ameliorer l'algo de tri

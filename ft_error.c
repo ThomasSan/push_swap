@@ -1,15 +1,33 @@
 #include "push_swap.h"
 
+void	error_duplicate(s_stack *lst, int x, int y)
+{
+	if (x == y)
+	{
+		flush(lst);
+		exit(0);
+	}
+}
+
+int		ft_isdigitx(int c)
+{
+	if ((c >= '0' && c <= '9') || c == '-')
+		return (1);
+	return (0);
+}
+
 int		check_digit(char *s)
 {
 	int i;
+	long nb;
 
 	i = 0;
-	if (ft_atol(s) > 2147483647)
+	nb = ft_atol(s);
+	if (nb > 2147483647 || nb < -2147483648)
 		return (-1);
 	while (s[i])
 	{
-		if (ft_isdigit(s[i]) == 0)
+		if (ft_isdigitx(s[i]) == 0)
 			return (-1);
 		i++;
 	}

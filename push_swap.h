@@ -3,6 +3,7 @@
 
 #include "libft/libft.h"
 #include <stdlib.h>
+#include <limits.h>
 #include <stdio.h>
 
 typedef struct		t_stack
@@ -21,11 +22,16 @@ typedef	struct		t_shell
 }					s_shell;
 
 /*
+**	Main functions
+*/
+void				push_swap(s_shell *head);
+/*
 **	Errors functions
 */
 long				ft_atol(char *s);
 int					check_digit(char *s);
 int					flush(s_stack *lst);
+void				error_duplicate(s_stack *lst, int x, int y);
 /*
 **	Listwise functions
 */
@@ -39,20 +45,20 @@ s_stack				*pop_elem(s_stack *src);
 int					ft_sa(s_shell *head);
 int					ft_sb(s_shell *head);
 int					ft_ss(s_shell *head);
-int					ft_pushB(s_shell *head);
-int					ft_pushA(s_shell *head);
+int					ft_pb(s_shell *head);
+int					ft_pa(s_shell *head);
 void				swap_int(int *a, int *b);
-int					rotateA(s_shell *head);
-int					rotateB(s_shell *head);
-int					rotateR(s_shell *head);
-int					rrA(s_shell *head);
-int					rrB(s_shell *head);
-int					rrR(s_shell *head);
+int					ft_ra(s_shell *head);
+int					ft_rb(s_shell *head);
+int					ft_rr(s_shell *head);
+int					ft_rra(s_shell *head);
+int					ft_rrb(s_shell *head);
+int					ft_rrr(s_shell *head);
 /*
 **	Sort functions
 */
-int		ft_sorted(s_stack *head)
-int		ft_rev_sorted(s_stack *head)
+int					ft_sorted(s_stack *head);
+int					ft_rev_sorted(s_stack *head);
 /*
 **	Debug functions
 */

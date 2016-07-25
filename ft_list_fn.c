@@ -29,7 +29,11 @@ s_stack	*push_back_stack(s_stack *head, int i)
 	else
 	{
 		while(tmp->next)
+		{
+			error_duplicate(head, tmp->nb, i);
 			tmp = tmp->next;
+		}
+		error_duplicate(head, tmp->nb, i);
 		tmp->next = new;
 		new->prev = tmp;
 	}

@@ -20,20 +20,30 @@ int			swap_list(s_stack *head)
 
 int			ft_sa(s_shell *head)
 {
-	return (swap_list(head->stackA));
+	if (swap_list(head->stackA))
+	{
+		printf("sa\n");
+		return (1);
+	}
+	return (-1);
 }
 
 int			ft_sb(s_shell *head)
 {
-	return (swap_list(head->stackB));
+	if (swap_list(head->stackB))
+	{
+		printf("sb\n");
+		return (1);
+	}
+	return (-1);
 }
 
 int			ft_ss(s_shell *head)
 {
-	int		x;
-	int		y;
-			
-	x = swap_list(head->stackA);
-	y = swap_list(head->stackB);
-	return (x + y);
+	if (swap_list(head->stackA) &&swap_list(head->stackB))
+	{
+		printf("ss\n");
+		return (1);
+	}
+	return (-1);
 }
