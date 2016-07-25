@@ -49,6 +49,11 @@ int					rrA(s_shell *head);
 int					rrB(s_shell *head);
 int					rrR(s_shell *head);
 /*
+**	Sort functions
+*/
+int		ft_sorted(s_stack *head)
+int		ft_rev_sorted(s_stack *head)
+/*
 **	Debug functions
 */
 void				show_list(s_shell *head);
