@@ -5,7 +5,6 @@ s_stack	*ptr_to_lst(s_stack *stack)
 {
 	while(stack->next)
 		stack = stack->next;
-	printf("stack %p\n", stack);
 	return(stack);
 }
 
@@ -17,7 +16,6 @@ int rrA(s_shell *head)
 		return (1);
 	tmp = ptr_to_lst(head->stackA);
 	head->stackA = push_front_stack(head->stackA, tmp->nb);
-	printf("tmp %p\n", tmp);
 	tmp->prev->next = NULL;
 	tmp = NULL;
 	free(tmp);
@@ -26,18 +24,32 @@ int rrA(s_shell *head)
 
 int rrB(s_shell *head)
 {	
-	if (stack_list_len(head->stackB) <= 1)
+	s_stack *tmp;
+	
+	if (stack_list_len(head->stackA) <= 1)
 		return (1);
-	head->stackB = push_front_stack(head->stackB, head->stackB->nb);
-	head->stackB = pop_elem(head->stackB);
+	tmp = ptr_to_lst(head->stackA);
+	head->stackA = push_front_stack(head->stackA, tmp->nb);
+	tmp->prev->next = NULL;
+	tmp = NULL;
+	free(tmp);
 	return(1);
 }
 
 int rrR(s_shell *head)
 {
-	head->stackA = push_front_stack(head->stackA, head->stackA->nb);
-	head->stackA = pop_elem(head->stackA);
-	head->stackB = push_front_stack(head->stackB, head->stackB->nb);
-	head->stackB = pop_elem(head->stackB);
+	s_stack *tmpA;
+	s_stack *tmpB;
+
+	tmpA = ptr_to_lst(head->stackA);
+	tmpB = ptr_to_lst(head->stackB);
+	head->stackA = push_front_stack(head->stackA, tmpA->nb);
+	head->stackB = push_front_stack(head->stackB, tmpB->nb);
+	tmpA->prev->next = NULL;
+	tmpB->prev->next = NULL;
+	tmpA = NULL;
+	tmpB = NULL;
+	free(tmpA);
+	free(tmpB);
 	return (1);
 }

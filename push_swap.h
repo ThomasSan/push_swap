@@ -3,21 +3,29 @@
 
 #include "libft/libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-typedef struct 		t_stack
+typedef struct		t_stack
 {
-	int 			nb;
+	int				nb;
 	struct t_stack	*next;
 	struct t_stack	*prev;
 }					s_stack;
 
-typedef	struct 		t_shell
+typedef	struct		t_shell
 {
 	struct t_stack	*stackA;
 	struct t_stack	*stackB;
+	int				min;
+	int				max;
 }					s_shell;
 
-
+/*
+**	Errors functions
+*/
+long				ft_atol(char *s);
+int					check_digit(char *s);
+int					flush(s_stack *lst);
 /*
 **	Listwise functions
 */
@@ -34,12 +42,12 @@ int					ft_ss(s_shell *head);
 int					ft_pushB(s_shell *head);
 int					ft_pushA(s_shell *head);
 void				swap_int(int *a, int *b);
-int 				rotateA(s_shell *head);
-int 				rotateB(s_shell *head);
-int 				rotateR(s_shell *head);
-int 				rrA(s_shell *head);
-int 				rrB(s_shell *head);
-int 				rrR(s_shell *head);
+int					rotateA(s_shell *head);
+int					rotateB(s_shell *head);
+int					rotateR(s_shell *head);
+int					rrA(s_shell *head);
+int					rrB(s_shell *head);
+int					rrR(s_shell *head);
 /*
 **	Debug functions
 */

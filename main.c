@@ -1,86 +1,4 @@
 #include "push_swap.h"
-#include <stdio.h>
-
-int		stack_list_len(s_stack *head)
-{
-	int i;
-
-	i = 0;
-	while (head)
-	{
-		head = head->next;
-		i++;
-	}
-	return (i);
-}
-
-s_stack	*push_back_stack(s_stack *head, int i)
-{
-	s_stack	*tmp;
-	s_stack	*new;
-
-	tmp = head;
-	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
-		return (NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	new->nb = i;
-	if (tmp == NULL)
-		head = new;
-	else
-	{
-		while(tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->prev = tmp;
-	}
-	return (head);
-}
-
-s_stack	*push_front_stack(s_stack *head, int i)
-{
-	s_stack	*tmp;
-	s_stack	*new;
-
-	tmp = head;
-	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
-		return (NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	new->nb = i;
-	if (tmp == NULL)
-		head = new;
-	else
-	{
-		new->next = head;
-		head->prev = new;
-		head = new;
-	}
-	return (head);
-}
-
-void	show_list(s_shell *head)
-{
-	s_stack *tmpA = head->stackA;
-	s_stack *tmpB = head->stackB;
-
-	if (tmpA == NULL)
-		printf("A is empty\n");
-	while (tmpA)
-	{
-		printf("A:%d ", tmpA->nb);
-		tmpA = tmpA->next;
-	}
-	printf("\n");
-	if (tmpB == NULL)
-		printf("B is empty\n");
-	while (tmpB)
-	{
-		printf("B:%d", tmpB->nb);
-		tmpB = tmpB->next;
-	}
-	printf("\n");
-}
 
 int		main(int argc, char **argv)
 {
@@ -94,20 +12,27 @@ int		main(int argc, char **argv)
 		return (0);
 	head->stackA = NULL;
 	head->stackB = NULL;
+	head->max = -2147483648;
+	head->min = 2147483647;
 	while (argv[++i])
+	{
+		if (check_digit(argv[i]) == -1)
+			return (flush(head->stackA));
 		head->stackA = push_back_stack(head->stackA, ft_atoi(argv[i]));
+		head->min = ft_atoi(argv[i]) < head->min ? ft_atoi(argv[i]) : head->min;
+		head->max = ft_atoi(argv[i]) > head->max ? ft_atoi(argv[i]) : head->max;
+	}
 	show_list(head);
 	ft_pushB(head);
-	ft_pushB(head);
-	show_list(head);
-	ft_pushA(head);
-	ft_pushA(head);
-	// ft_sa(head);
-	show_list(head);
+	ft_sa(head);
 	rrA(head);
-	// rotateA(head);
+	rrA(head);
+	ft_sa(head);
+	rotateA(head);
+	ft_pushA(head);
 	show_list(head);
+	printf("min : %d max : %d\n", head->min, head->max);
 	return (0);
 }
 
-//Ajouter un checker pour les non digits !
+// dans error verifier le plus petit int
