@@ -71,7 +71,7 @@ void	show_list(s_shell *head)
 		printf("A is empty\n");
 	while (tmpA)
 	{
-		printf("A:%d ", tmpA->nb);
+		printf("A:%d ptr: %p", tmpA->nb, tmpA);
 		tmpA = tmpA->next;
 	}
 	printf("\n");
@@ -79,7 +79,7 @@ void	show_list(s_shell *head)
 		printf("B is empty\n");
 	while (tmpB)
 	{
-		printf("B:%d", tmpB->nb);
+		printf("B:%d ptr: %p", tmpB->nb, tmpB);
 		tmpB = tmpB->next;
 	}
 	printf("\n");

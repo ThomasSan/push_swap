@@ -4,7 +4,7 @@ void	error_duplicate(s_stack *lst, int x, int y)
 {
 	if (x == y)
 	{
-		flush(lst);
+		flush(lst, 0);
 		exit(0);
 	}
 }
@@ -34,7 +34,7 @@ int		check_digit(char *s)
 	return (1);
 }
 
-int		flush(s_stack *lst)
+int		flush(s_stack *lst, int x)
 {
 	s_stack *tmp;
 
@@ -46,6 +46,7 @@ int		flush(s_stack *lst)
 		free(lst);
 		lst = tmp;
 	}
-	ft_putendl_fd("Error", 2);
+	if (x == 0)
+		ft_putendl_fd("Error", 2);
 	return (0);
 }

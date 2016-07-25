@@ -30,7 +30,7 @@ void				push_swap(s_shell *head);
 */
 long				ft_atol(char *s);
 int					check_digit(char *s);
-int					flush(s_stack *lst);
+int					flush(s_stack *lst, int x);
 void				error_duplicate(s_stack *lst, int x, int y);
 /*
 **	Listwise functions

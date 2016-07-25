@@ -12,14 +12,14 @@ void		swap_int(int *a, int *b)
 
 int			swap_list(s_stack *head)
 {
-	if (stack_list_len(head) <= 1)
-		return (-1);
 	swap_int(&head->nb, &head->next->nb);
 	return (1);
 }
 
 int			ft_sa(s_shell *head)
 {
+	if (stack_list_len(head->stackA) <= 1)
+		return (-1);
 	if (swap_list(head->stackA))
 	{
 		printf("sa\n");
@@ -30,6 +30,8 @@ int			ft_sa(s_shell *head)
 
 int			ft_sb(s_shell *head)
 {
+	if (stack_list_len(head->stackB) <= 1)
+		return (-1);
 	if (swap_list(head->stackB))
 	{
 		printf("sb\n");
@@ -40,6 +42,8 @@ int			ft_sb(s_shell *head)
 
 int			ft_ss(s_shell *head)
 {
+	if (stack_list_len(head->stackA) <= 1 || stack_list_len(head->stackB) <= 1)
+		return (-1);
 	if (swap_list(head->stackA) &&swap_list(head->stackB))
 	{
 		printf("ss\n");
