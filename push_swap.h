@@ -38,6 +38,7 @@ void				error_duplicate(s_stack *lst, int x, int y);
 int					stack_list_len(s_stack *head);
 s_stack				*push_front_stack(s_stack *head, int i);
 s_stack				*push_back_stack(s_stack *head, int i);
+s_stack				*push_back_stack2(s_stack *head, int i);
 s_stack				*pop_elem(s_stack *src);
 /*
 **	Basics operations

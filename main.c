@@ -12,7 +12,6 @@ int		main(int argc, char **argv)
 		ft_strsplit(argv[1], ' ');
 	if (!(head = (s_shell*)malloc(sizeof(s_shell*))))
 		return (0);
-	printf("head %p\n", head);
 	head->stackA = NULL;
 	head->stackB = NULL;
 	head->max = -2147483648;
@@ -21,16 +20,14 @@ int		main(int argc, char **argv)
 	{
 		if (check_digit(argv[i]) == -1)
 			return (flush(head->stackA, 0));
-		head->stackA = push_back_stack(head->stackA, ft_atoi(argv[i]));
+		head->stackA = push_back_stack2(head->stackA, ft_atoi(argv[i]));
 		head->min = ft_atoi(argv[i]) < head->min ? ft_atoi(argv[i]) : head->min;
 		head->max = ft_atoi(argv[i]) > head->max ? ft_atoi(argv[i]) : head->max;
 	}
-	show_list(head);
+	// show_list(head);
 	while (ft_sorted(head->stackA) == 0)
 		push_swap(head);
 	// show_list(head);
 	return (0);
 }
 
-// dans error verifier le plus petit int
-// utiliser les min - max pour ameliorer l'algo de tri

@@ -29,6 +29,30 @@ s_stack	*push_back_stack(s_stack *head, int i)
 	else
 	{
 		while(tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->prev = tmp;
+		head->prev = new;
+	}
+	return (head);
+}
+
+s_stack	*push_back_stack2(s_stack *head, int i)
+{
+	s_stack	*tmp;
+	s_stack	*new;
+
+	tmp = head;
+	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
+		return (NULL);
+	new->next = NULL;
+	new->prev = NULL;
+	new->nb = i;
+	if (tmp == NULL)
+		head = new;
+	else
+	{
+		while(tmp->next)
 		{
 			error_duplicate(head, tmp->nb, i);
 			tmp = tmp->next;
@@ -36,6 +60,7 @@ s_stack	*push_back_stack(s_stack *head, int i)
 		error_duplicate(head, tmp->nb, i);
 		tmp->next = new;
 		new->prev = tmp;
+		head->prev = new;
 	}
 	return (head);
 }
@@ -71,7 +96,7 @@ void	show_list(s_shell *head)
 		printf("A is empty\n");
 	while (tmpA)
 	{
-		printf("A:%d ptr: %p", tmpA->nb, tmpA);
+		printf("A:%d ", tmpA->nb);
 		tmpA = tmpA->next;
 	}
 	printf("\n");
@@ -79,7 +104,7 @@ void	show_list(s_shell *head)
 		printf("B is empty\n");
 	while (tmpB)
 	{
-		printf("B:%d ptr: %p", tmpB->nb, tmpB);
+		printf("B:%d ", tmpB->nb);
 		tmpB = tmpB->next;
 	}
 	printf("\n");

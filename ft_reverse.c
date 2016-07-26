@@ -8,7 +8,7 @@ s_stack	*ptr_to_lst(s_stack *stack)
 	return(stack);
 }
 
-int rrA(s_shell *head)
+int ft_rra(s_shell *head)
 {
 	s_stack *tmp;
 	
@@ -19,10 +19,11 @@ int rrA(s_shell *head)
 	tmp->prev->next = NULL;
 	tmp = NULL;
 	free(tmp);
+	ft_putendl("rra");
 	return(1);
 }
 
-int rrB(s_shell *head)
+int ft_rrb(s_shell *head)
 {	
 	s_stack *tmp;
 	
@@ -33,10 +34,11 @@ int rrB(s_shell *head)
 	tmp->prev->next = NULL;
 	tmp = NULL;
 	free(tmp);
+	ft_putendl("rrb");
 	return(1);
 }
 
-int rrR(s_shell *head)
+int ft_rrr(s_shell *head)
 {
 	s_stack *tmpA;
 	s_stack *tmpB;

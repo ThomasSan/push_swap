@@ -16,7 +16,7 @@ int			ft_pb(s_shell *head)
 		return (-1);
 	head->stackB = push_front_stack(head->stackB, head->stackA->nb);
 	head->stackA = pop_elem(head->stackA);
-	printf("ft_pb\n");
+	printf("pb\n");
 	return (1);
 }
 
@@ -26,6 +26,6 @@ int			ft_pa(s_shell *head)
 		return (-1);
 	head->stackA = push_front_stack(head->stackA, head->stackB->nb);
 	head->stackB = pop_elem(head->stackB);
-	printf("ft_pb\n");
+	printf("pa\n");
 	return (1);
 }
