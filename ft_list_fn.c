@@ -104,12 +104,12 @@ void	show_list(s_shell *head)
 	ft_putchar('\n');
 	ft_putstr("B: ");
 	if (tmpB == NULL)
-		printf("is empty");
+		ft_putstr("is empty");
 	while (tmpB)
 	{
 		ft_putnbr(tmpB->nb);
 		ft_putchar(' ');
 		tmpB = tmpB->next;
 	}
-	printf("\n");
+	ft_putchar('\n');
 }

@@ -27,5 +27,6 @@ int ft_rr(s_shell *head)
 	head->stackA = pop_elem(head->stackA);
 	head->stackB = push_back_stack(head->stackB, head->stackB->nb);
 	head->stackB = pop_elem(head->stackB);
+	ft_putendl("rr");
 	return (1);
 }

@@ -4,7 +4,6 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 #include <limits.h>
-#include <stdio.h>
 
 typedef struct		t_stack
 {
@@ -40,6 +39,7 @@ s_stack				*push_front_stack(s_stack *head, int i);
 s_stack				*push_back_stack(s_stack *head, int i);
 s_stack				*push_back_stack2(s_stack *head, int i);
 s_stack				*pop_elem(s_stack *src);
+void				free_lst(s_shell *head);
 /*
 **	Basics operations
 */

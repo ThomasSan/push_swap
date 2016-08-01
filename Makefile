@@ -10,23 +10,31 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_ls
+NAME = push_swap
+NAME2 = checker
 SRC = main.c ft_atol.c ft_error.c ft_list_fn.c ft_push.c ft_reverse.c \
 		ft_rotate.c ft_sorted.c ft_swap.c push_swap.c
+SRC2 = checker.c ft_error.c ft_list_fn.c ft_atol.c gnl.c ft_push.c \
+		ft_reverse.c ft_rotate.c ft_sorted.c ft_swap.c push_swap.c
 
 OBJ = $(SRC:%.c=obj/%.o)
+OBJ2 = $(SRC2:%.c=obj/%.o)
 
-CXX = clang
+CXX = gcc
 CXXFLAGS = -Wall -Werror -Wextra
 
 INC = -I includes
 LIB = libft/
 
-all: $(NAME)
+all: $(NAME) $(NAME2)
 
 $(NAME): obj $(OBJ)
 	@make -s -C $(LIB)
 	@$(CXX) $(CXXFLAGS) -o $@ $(OBJ) $(INC) -L$(LIB) -lft -g
+
+$(NAME2): obj $(OBJ2)
+	@make -s -C $(LIB)
+	@$(CXX) $(CXXFLAGS) -o $(NAME2) $(OBJ2) $(INC) -L$(LIB) -lft -g
 
 obj/%.o: %.c
 	$(CXX) $(CXXFLAGS) $(INC) -o $@ -c $< -I$(LIB)

@@ -1,21 +1,5 @@
 #include "push_swap.h"
 
-void	free_lst(s_shell *head)
-{
-	s_stack *tmp;
-	while (head->stackA)
-	{
-		tmp = head->stackA;
-		free(tmp);
-		tmp = NULL;
-		head->stackA = head->stackA->next;
-	}
-	head->stackA = NULL;
-	head->stackB = NULL;
-	free(head);
-	head = NULL;
-}
-
 int		main(int argc, char **argv)
 {
 	s_shell		*head;
@@ -30,8 +14,6 @@ int		main(int argc, char **argv)
 		return (0);
 	head->stackA = NULL;
 	head->stackB = NULL;
-	head->max = -2147483648;
-	head->min = 2147483647;
 	while (argv[++i])
 	{
 		if (check_digit(argv[i]) == -1)
@@ -40,13 +22,8 @@ int		main(int argc, char **argv)
 		head->min = ft_atoi(argv[i]) < head->min ? ft_atoi(argv[i]) : head->min;
 		head->max = ft_atoi(argv[i]) > head->max ? ft_atoi(argv[i]) : head->max;
 	}
-	// show_list(head);
 	while (ft_sorted(head->stackA) == 0)
-	{
 		push_swap(head);
-		// printf("sort %d\n",ft_sorted(head->stackA));
-	}
-	// show_list(head);
 	free_lst(head);
 	return (0);
 }

@@ -22,7 +22,7 @@ int			ft_sa(s_shell *head)
 		return (-1);
 	if (swap_list(head->stackA))
 	{
-		printf("sa\n");
+		ft_putstr("sa\n");
 		return (1);
 	}
 	return (-1);
@@ -34,7 +34,7 @@ int			ft_sb(s_shell *head)
 		return (-1);
 	if (swap_list(head->stackB))
 	{
-		printf("sb\n");
+		ft_putstr("sb\n");
 		return (1);
 	}
 	return (-1);
@@ -46,7 +46,7 @@ int			ft_ss(s_shell *head)
 		return (-1);
 	if (swap_list(head->stackA) &&swap_list(head->stackB))
 	{
-		printf("ss\n");
+		ft_putstr("ss\n");
 		return (1);
 	}
 	return (-1);
