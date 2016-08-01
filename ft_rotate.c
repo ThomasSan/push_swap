@@ -7,6 +7,7 @@ int ft_ra(s_shell *head)
 	head->stackA = push_back_stack(head->stackA, head->stackA->nb);
 	head->stackA = pop_elem(head->stackA);
 	ft_putendl("ra");
+	// show_list(head);
 	return(1);
 }
 

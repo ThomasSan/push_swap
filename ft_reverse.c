@@ -20,6 +20,7 @@ int ft_rra(s_shell *head)
 	tmp = NULL;
 	free(tmp);
 	ft_putendl("rra");
+	// show_list(head);
 	return(1);
 }
 
@@ -27,10 +28,10 @@ int ft_rrb(s_shell *head)
 {	
 	s_stack *tmp;
 	
-	if (stack_list_len(head->stackA) <= 1)
+	if (stack_list_len(head->stackB) <= 1)
 		return (1);
-	tmp = ptr_to_lst(head->stackA);
-	head->stackA = push_front_stack(head->stackA, tmp->nb);
+	tmp = ptr_to_lst(head->stackB);
+	head->stackB = push_front_stack(head->stackB, tmp->nb);
 	tmp->prev->next = NULL;
 	tmp = NULL;
 	free(tmp);

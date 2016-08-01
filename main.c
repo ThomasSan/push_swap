@@ -1,5 +1,21 @@
 #include "push_swap.h"
 
+void	free_lst(s_shell *head)
+{
+	s_stack *tmp;
+	while (head->stackA)
+	{
+		tmp = head->stackA;
+		free(tmp);
+		tmp = NULL;
+		head->stackA = head->stackA->next;
+	}
+	head->stackA = NULL;
+	head->stackB = NULL;
+	free(head);
+	head = NULL;
+}
+
 int		main(int argc, char **argv)
 {
 	s_shell		*head;
@@ -26,8 +42,11 @@ int		main(int argc, char **argv)
 	}
 	// show_list(head);
 	while (ft_sorted(head->stackA) == 0)
+	{
 		push_swap(head);
+		// printf("sort %d\n",ft_sorted(head->stackA));
+	}
 	// show_list(head);
+	free_lst(head);
 	return (0);
 }
-

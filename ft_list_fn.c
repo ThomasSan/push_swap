@@ -92,19 +92,23 @@ void	show_list(s_shell *head)
 	s_stack *tmpA = head->stackA;
 	s_stack *tmpB = head->stackB;
 
+	ft_putstr("A: ");
 	if (tmpA == NULL)
-		printf("A is empty\n");
+		ft_putstr("is empty\n");
 	while (tmpA)
 	{
-		printf("A:%d ", tmpA->nb);
+		ft_putnbr(tmpA->nb);
+		ft_putchar(' ');
 		tmpA = tmpA->next;
 	}
-	printf("\n");
+	ft_putchar('\n');
+	ft_putstr("B: ");
 	if (tmpB == NULL)
-		printf("B is empty\n");
+		printf("is empty");
 	while (tmpB)
 	{
-		printf("B:%d ", tmpB->nb);
+		ft_putnbr(tmpB->nb);
+		ft_putchar(' ');
 		tmpB = tmpB->next;
 	}
 	printf("\n");
