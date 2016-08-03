@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include <stdio.h>
 
 void	free_lst(s_shell *head)
 {
@@ -30,8 +31,8 @@ void	push_swap_suite(s_shell *head)
 {
 	while (stack_list_len(head->stackB) > 0)
 	{
-		// show_list(head);
-		if (stack_list_len(head->stackB) > 1 && get_last_nb(head->stackB) > head->stackB->nb)
+		show_list(head);
+		while (stack_list_len(head->stackB) > 1 && get_last_nb(head->stackB) > head->stackB->nb)
 			ft_rrb(head);
 		ft_pa(head);
 		if (stack_list_len(head->stackB) > 1 && head->stackA->nb > head->stackA->next->nb && head->stackB->nb < head->stackB->next->nb)
@@ -50,16 +51,14 @@ void	push_swap_suite(s_shell *head)
 
 void	push_swap(s_shell *head)
 {
-	int lastA;
 	int lastB;
 
 	while (stack_list_len(head->stackA) > 1)
 	{
-		// show_list(head);
-		lastA = get_last_nb(head->stackA);
-		if (head->max == head->stackA->nb)
+		show_list(head);
+		if (head->max == head->stackA->nb || (stack_list_len(head->stackB) > 2 && head->stackA->nb > head->stackA->next->nb && head->stackA->nb > head->stackA->next->next->nb ))
 			ft_ra(head);
-		if (lastA < head->stackA->nb && lastA < head->stackA->next->nb)
+		while (stack_list_len(head->stackA) > 2 && get_last_nb(head->stackA) < head->stackA->nb && get_last_nb(head->stackA) < head->stackA->next->nb)
 			ft_rra(head);
 		if (stack_list_len(head->stackB) > 1 && head->stackA->nb > head->stackA->next->nb && head->stackB->nb < head->stackB->next->nb)
 			ft_ss(head);
@@ -72,11 +71,12 @@ void	push_swap(s_shell *head)
 		if (ft_sorted(head->stackA))
 			break ;
 		ft_pb(head);
-		// show_list(head);
+		show_list(head);
 		lastB = get_last_nb(head->stackB);
-		// if (stack_list_len(head->stackB) > 1 && lastB > head->stackB->nb && lastA < head->stackA->nb)
-			// ft_rr(head);
-		if (stack_list_len(head->stackB) > 3 && ((head->stackB->nb < head->stackB->next->nb
+		if ((stack_list_len(head->stackA) > 2 && stack_list_len(head->stackB) > 2 && head->stackA->nb > head->stackA->next->nb && head->stackA->nb > head->stackA->next->next->nb ) &&
+		 ((head->stackB->nb < head->stackB->next->nb && head->stackB->nb < head->stackB->next->next->nb) || lastB > head->stackB->nb))
+			ft_rr(head);
+		if (stack_list_len(head->stackB) > 2 && ((head->stackB->nb < head->stackB->next->nb
 			&& head->stackB->nb < head->stackB->next->next->nb) || lastB > head->stackB->nb))
 			ft_rb(head);
 	}
