@@ -1,32 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rotate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 14:30:51 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 14:30:52 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int ft_ra(s_shell *head)
+int	ft_ra(t_shell *head, int show)
 {
-	if (stack_list_len(head->stackA) <= 1)
+	if (l_len(head->sa) <= 1)
 		return (-1);
-	head->stackA = push_back_stack(head->stackA, head->stackA->nb);
-	head->stackA = pop_elem(head->stackA);
-	ft_putendl("ra");
-	// show_list(head);
-	return(1);
+	head->sa = push_back_stack(head->sa, head->sa->nb);
+	head->sa = pop_elem(head->sa);
+	if (show)
+		ft_putendl("ra");
+	return (1);
 }
 
-int ft_rb(s_shell *head)
+int	ft_rb(t_shell *head, int show)
 {
-	if (stack_list_len(head->stackB) <= 1)
+	if (l_len(head->sb) <= 1)
 		return (-1);
-	head->stackB = push_back_stack(head->stackB, head->stackB->nb);
-	head->stackB = pop_elem(head->stackB);
-	ft_putendl("rb");
-	return(1);
+	head->sb = push_back_stack(head->sb, head->sb->nb);
+	head->sb = pop_elem(head->sb);
+	if (show)
+		ft_putendl("rb");
+	return (1);
 }
 
-int ft_rr(s_shell *head)
+int	ft_rr(t_shell *head, int show)
 {
-	head->stackA = push_back_stack(head->stackA, head->stackA->nb);
-	head->stackA = pop_elem(head->stackA);
-	head->stackB = push_back_stack(head->stackB, head->stackB->nb);
-	head->stackB = pop_elem(head->stackB);
-	ft_putendl("rr");
+	head->sa = push_back_stack(head->sa, head->sa->nb);
+	head->sa = pop_elem(head->sa);
+	head->sb = push_back_stack(head->sb, head->sb->nb);
+	head->sb = pop_elem(head->sb);
+	if (show)
+		ft_putendl("rr");
 	return (1);
 }

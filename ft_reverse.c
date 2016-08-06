@@ -1,58 +1,71 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_reverse.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 14:27:46 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 14:27:47 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-s_stack	*ptr_to_lst(s_stack *stack)
+t_stack	*ptr_to_lst(t_stack *stack)
 {
-	while(stack->next)
-		stack = stack->next;
-	return(stack);
+	while (stack->n)
+		stack = stack->n;
+	return (stack);
 }
 
-int ft_rra(s_shell *head)
+int		ft_rra(t_shell *head, int show)
 {
-	s_stack *tmp;
-	
-	if (stack_list_len(head->stackA) <= 1)
+	t_stack *tmp;
+
+	if (l_len(head->sa) <= 1)
 		return (1);
-	tmp = ptr_to_lst(head->stackA);
-	head->stackA = push_front_stack(head->stackA, tmp->nb);
-	tmp->prev->next = NULL;
+	tmp = ptr_to_lst(head->sa);
+	head->sa = push_front_stack(head->sa, tmp->nb);
+	tmp->prev->n = NULL;
 	tmp = NULL;
 	free(tmp);
-	ft_putendl("rra");
-	// show_list(head);
-	return(1);
+	if (show)
+		ft_putendl("rra");
+	return (1);
 }
 
-int ft_rrb(s_shell *head)
-{	
-	s_stack *tmp;
-	
-	if (stack_list_len(head->stackB) <= 1)
+int		ft_rrb(t_shell *head, int show)
+{
+	t_stack	*tmp;
+
+	if (l_len(head->sb) <= 1)
 		return (1);
-	tmp = ptr_to_lst(head->stackB);
-	head->stackB = push_front_stack(head->stackB, tmp->nb);
-	tmp->prev->next = NULL;
+	tmp = ptr_to_lst(head->sb);
+	head->sb = push_front_stack(head->sb, tmp->nb);
+	tmp->prev->n = NULL;
 	tmp = NULL;
 	free(tmp);
-	ft_putendl("rrb");
-	return(1);
+	if (show)
+		ft_putendl("rrb");
+	return (1);
 }
 
-int ft_rrr(s_shell *head)
+int		ft_rrr(t_shell *head, int show)
 {
-	s_stack *tmpA;
-	s_stack *tmpB;
+	t_stack *tmp_a;
+	t_stack *tmp_b;
 
-	tmpA = ptr_to_lst(head->stackA);
-	tmpB = ptr_to_lst(head->stackB);
-	head->stackA = push_front_stack(head->stackA, tmpA->nb);
-	head->stackB = push_front_stack(head->stackB, tmpB->nb);
-	tmpA->prev->next = NULL;
-	tmpB->prev->next = NULL;
-	tmpA = NULL;
-	tmpB = NULL;
-	free(tmpA);
-	free(tmpB);
+	(void)show;
+	tmp_a = ptr_to_lst(head->sa);
+	tmp_b = ptr_to_lst(head->sb);
+	head->sa = push_front_stack(head->sa, tmp_a->nb);
+	head->sb = push_front_stack(head->sb, tmp_b->nb);
+	tmp_a->prev->n = NULL;
+	tmp_b->prev->n = NULL;
+	tmp_a = NULL;
+	tmp_b = NULL;
+	free(tmp_a);
+	free(tmp_b);
 	return (1);
 }

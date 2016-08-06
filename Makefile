@@ -6,7 +6,7 @@
 #    By: mdebelle <tsanzey@student.42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 18:33:59 by tsanzey           #+#    #+#              #
-#    Updated: 2016/01/14 14:40:19 by tsanzey          ###   ########.fr        #
+#    Updated: 2016/08/06 12:38:54 by tsanzey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,10 @@ LIB = libft/
 all: $(NAME) $(NAME2)
 
 $(NAME): obj $(OBJ)
-	@make -s -C $(LIB)
+	@make re -s -C $(LIB)
 	@$(CXX) $(CXXFLAGS) -o $@ $(OBJ) $(INC) -L$(LIB) -lft -g
 
 $(NAME2): obj $(OBJ2)
-	@make -s -C $(LIB)
 	@$(CXX) $(CXXFLAGS) -o $(NAME2) $(OBJ2) $(INC) -L$(LIB) -lft -g
 
 obj/%.o: %.c

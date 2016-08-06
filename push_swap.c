@@ -1,84 +1,93 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 12:43:08 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 13:02:48 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
-void	free_lst(s_shell *head)
+int		free_lst(t_shell *head)
 {
-	s_stack *tmp;
-	while (head->stackA)
+	t_stack *tmp;
+
+	while (head->sa)
 	{
-		tmp = head->stackA;
+		tmp = head->sa;
 		free(tmp);
 		tmp = NULL;
-		head->stackA = head->stackA->next;
+		head->sa = head->sa->n;
 	}
-	head->stackA = NULL;
-	head->stackB = NULL;
+	head->sa = NULL;
+	head->sb = NULL;
 	free(head);
 	head = NULL;
+	return (0);
 }
 
-int 	get_last_nb(s_stack *head)
+int		l_nb(t_stack *head)
 {
-	s_stack *tmp;
+	t_stack *tmp;
 
 	tmp = head;
-	while (tmp->next)
-		tmp = tmp->next;
+	while (tmp->n)
+		tmp = tmp->n;
 	return (tmp->nb);
 }
 
-void	push_swap_suite(s_shell *head)
+void	push_swap_suite(t_shell *head)
 {
-	while (stack_list_len(head->stackB) > 0)
+	while (l_len(head->sb) > 0)
 	{
-		show_list(head);
-		while (stack_list_len(head->stackB) > 1 && get_last_nb(head->stackB) > head->stackB->nb)
-			ft_rrb(head);
-		ft_pa(head);
-		if (stack_list_len(head->stackB) > 1 && head->stackA->nb > head->stackA->next->nb && head->stackB->nb < head->stackB->next->nb)
-			ft_ss(head);
-		else 
+		while (l_len(head->sb) > 1 &&
+				l_nb(head->sb) > head->sb->nb)
+			ft_rrb(head, 1);
+		ft_pa(head, 1);
+		if (l_len(head->sb) > 1 &&
+head->sa->nb > head->sa->n->nb && head->sb->nb < head->sb->n->nb)
+			ft_ss(head, 1);
+		else
 		{
-			if (head->stackA->nb > head->stackA->next->nb)
-				ft_sa(head);
-			if (stack_list_len(head->stackB) > 1 && head->stackB->nb < head->stackB->next->nb)
-				ft_sb(head);
+			if (head->sa->nb > head->sa->n->nb)
+				ft_sa(head, 1);
+			if (l_len(head->sb) > 1 &&
+				head->sb->nb < head->sb->n->nb)
+				ft_sb(head, 1);
 		}
-		// if (!ft_sorted(head->stackA) && ft_rev_sorted(head->stackB))
-		// 	break ;
 	}
 }
 
-void	push_swap(s_shell *head)
+void	push_swap(t_shell *h)
 {
-	int lastB;
-
-	while (stack_list_len(head->stackA) > 1)
+	while (l_len(h->sa) > 1)
 	{
-		show_list(head);
-		if (head->max == head->stackA->nb || (stack_list_len(head->stackB) > 2 && head->stackA->nb > head->stackA->next->nb && head->stackA->nb > head->stackA->next->next->nb ))
-			ft_ra(head);
-		while (stack_list_len(head->stackA) > 2 && get_last_nb(head->stackA) < head->stackA->nb && get_last_nb(head->stackA) < head->stackA->next->nb)
-			ft_rra(head);
-		if (stack_list_len(head->stackB) > 1 && head->stackA->nb > head->stackA->next->nb && head->stackB->nb < head->stackB->next->nb)
-			ft_ss(head);
-		else if (head->stackA->nb > head->stackA->next->nb)
-			ft_sa(head);
-		else if (stack_list_len(head->stackB) > 1 && head->stackB->nb < head->stackB->next->nb)
-			ft_sb(head);
-		if (stack_list_len(head->stackB) > 1 && lastB > head->stackB->nb)
-			ft_rrb(head);
-		if (ft_sorted(head->stackA))
+		if (h->max == h->sa->nb || (l_len(h->sb) > 2 &&
+h->sa->nb > h->sa->n->nb && h->sa->nb > h->sa->n->n->nb))
+			ft_ra(h, 1);
+		while (l_len(h->sa) > 2 &&
+l_nb(h->sa) < h->sa->nb && l_nb(h->sa) < h->sa->n->nb)
+			ft_rra(h, 1);
+		if (l_len(h->sb) > 1 && h->sa->nb > h->sa->n->nb
+	&& h->sb->nb < h->sb->n->nb)
+			ft_ss(h, 1);
+		else if (h->sa->nb > h->sa->n->nb)
+			ft_sa(h, 1);
+		else if (l_len(h->sb) > 1 && h->sb->nb < h->sb->n->nb)
+			ft_sb(h, 1);
+		if (l_len(h->sb) > 1 && l_nb(h->sb) > h->sb->nb)
+			ft_rrb(h, 1);
+		if (ft_sorted(h->sa))
 			break ;
-		ft_pb(head);
-		show_list(head);
-		lastB = get_last_nb(head->stackB);
-		if ((stack_list_len(head->stackA) > 2 && stack_list_len(head->stackB) > 2 && head->stackA->nb > head->stackA->next->nb && head->stackA->nb > head->stackA->next->next->nb ) &&
-		 ((head->stackB->nb < head->stackB->next->nb && head->stackB->nb < head->stackB->next->next->nb) || lastB > head->stackB->nb))
-			ft_rr(head);
-		if (stack_list_len(head->stackB) > 2 && ((head->stackB->nb < head->stackB->next->nb
-			&& head->stackB->nb < head->stackB->next->next->nb) || lastB > head->stackB->nb))
-			ft_rb(head);
+		ft_pb(h, 1);
+		if (l_len(h->sb) > 2 && ((h->sb->nb < h->sb->n->nb
+	&& h->sb->nb < h->sb->n->n->nb) || l_nb(h->sb) > h->sb->nb))
+			ft_rb(h, 1);
 	}
-	push_swap_suite(head);
+	push_swap_suite(h);
 }

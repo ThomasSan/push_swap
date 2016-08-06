@@ -1,31 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 14:23:42 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 14:23:44 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-s_stack		*pop_elem(s_stack *src)
+t_stack		*pop_elem(t_stack *src)
 {
-	s_stack		*tmp;
+	t_stack		*tmp;
 
-	tmp = src->next;
+	tmp = src->n;
 	free(src);
 	src = NULL;
 	return (tmp);
 }
 
-int			ft_pb(s_shell *head)
+int			ft_pb(t_shell *head, int show)
 {
-	if(stack_list_len(head->stackA) < 1)
+	if (l_len(head->sa) < 1)
 		return (-1);
-	head->stackB = push_front_stack(head->stackB, head->stackA->nb);
-	head->stackA = pop_elem(head->stackA);
-	ft_putstr("pb\n");
+	head->sb = push_front_stack(head->sb, head->sa->nb);
+	head->sa = pop_elem(head->sa);
+	if (show)
+		ft_putstr("pb\n");
 	return (1);
 }
 
-int			ft_pa(s_shell *head)
+int			ft_pa(t_shell *head, int show)
 {
-	if(stack_list_len(head->stackB) < 1)
+	if (l_len(head->sb) < 1)
 		return (-1);
-	head->stackA = push_front_stack(head->stackA, head->stackB->nb);
-	head->stackB = pop_elem(head->stackB);
-	ft_putstr("pa\n");
+	head->sa = push_front_stack(head->sa, head->sb->nb);
+	head->sb = pop_elem(head->sb);
+	if (show)
+		ft_putstr("pa\n");
 	return (1);
 }

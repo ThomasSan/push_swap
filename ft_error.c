@@ -1,6 +1,19 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 14:46:18 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 14:46:45 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	error_duplicate(s_stack *lst, int x, int y)
+#include "push_swap.h"
+#include <stdio.h>
+
+void	error_duplicate(t_stack *lst, int x, int y)
 {
 	if (x == y)
 	{
@@ -18,8 +31,8 @@ int		ft_isdigitx(int c)
 
 int		check_digit(char *s)
 {
-	int i;
-	long nb;
+	int		i;
+	long	nb;
 
 	i = 0;
 	nb = ft_atol(s);
@@ -34,14 +47,14 @@ int		check_digit(char *s)
 	return (1);
 }
 
-int		flush(s_stack *lst, int x)
+int		flush(t_stack *lst, int x)
 {
-	s_stack *tmp;
+	t_stack *tmp;
 
 	tmp = lst;
 	while (tmp)
 	{
-		tmp = tmp->next;
+		tmp = tmp->n;
 		lst = NULL;
 		free(lst);
 		lst = tmp;

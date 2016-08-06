@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/15 11:03:56 by tsanzey           #+#    #+#             */
-/*   Updated: 2015/12/15 11:03:58 by tsanzey          ###   ########.fr       */
+/*   Created: 2016/08/06 14:23:54 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 14:28:36 by tsanzey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #include "get_next_line.h"
 #include "libft/libft.h"
 #include <stdio.h>
+
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "get_next_line.h"
+#include "libft/libft.h"
 
 int		get_next_line(int const fd, char **line)
 {
@@ -35,37 +42,7 @@ int		get_next_line(int const fd, char **line)
 	return (1);
 }
 
-char		*ft_strjoin2(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*dest;
-
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	dest = (char *)malloc(sizeof(char) * (i + j + 1));
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		dest[i] = s2[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
-	// free(s1);
-	return (dest);
-}
-
 int		checknewline(char *s)
-
 {
 	int i;
 
@@ -85,16 +62,19 @@ char	*del_line(char *s, int i)
 	int		j;
 	char	*tmp;
 
-	tmp = (char *)malloc(sizeof(ft_strlen(s) - i));
+	tmp = (char *)malloc(sizeof(char *) * (ft_strlen(s) - i));
 	j = 0;
 	if (!tmp)
 		return (NULL);
-	while (s[i])
+	while (s[i] != '\0')
 	{
 		tmp[j] = s[i];
 		j++;
 		i++;
 	}
+	tmp[j] = '\0';
+	if (s)
+		free(s);
 	return (tmp);
 }
 
@@ -102,21 +82,27 @@ int		get_line_len(int const fd, char **dst)
 {
 	int		i;
 	int		ret;
+	char	*tmp1;
 	char	buf[BUFF_SIZE + 1];
 
 	ret = 1;
-	while (ret != 0 && (i = checknewline(*dst)) == -1)
+	while (ret != 0 && ((i = checknewline(*dst)) == -1))
 	{
 		ret = read(fd, buf, BUFF_SIZE);
 		if (ret == -1)
 			return (-2);
 		buf[ret] = '\0';
+		tmp1 = *dst;
 		if (*dst == NULL)
 			*dst = ft_strdup(buf);
 		else
-			*dst = ft_strjoin2(*dst, buf);
+			*dst = ft_strjoin(*dst, buf);
+		free(tmp1);
 	}
 	if (ret == 0 && i == -1 && ft_strcmp("", *dst))
-		return (ft_strlen(*dst));
+	{
+		*dst = ft_strjoin(*dst, "\n");
+		i = (ft_strlen(*dst) - 1);
+	}
 	return (i);
 }

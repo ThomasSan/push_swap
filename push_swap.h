@@ -1,67 +1,80 @@
-#ifndef	PUSH_SWAP_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 14:48:24 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 15:00:33 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "libft/libft.h"
-#include <stdlib.h>
-#include <limits.h>
+# include "libft/libft.h"
+# include <stdlib.h>
+# include <limits.h>
 
-typedef struct		t_stack
+typedef struct		s_stack
 {
 	int				nb;
-	struct t_stack	*next;
-	struct t_stack	*prev;
-}					s_stack;
+	struct s_stack	*n;
+	struct s_stack	*prev;
+}					t_stack;
 
-typedef	struct		t_shell
+typedef	struct		s_shell
 {
-	struct t_stack	*stackA;
-	struct t_stack	*stackB;
+	struct s_stack	*sa;
+	struct s_stack	*sb;
 	int				min;
 	int				max;
-}					s_shell;
+}					t_shell;
 
 /*
 **	Main functions
 */
-void				push_swap(s_shell *head);
+void				push_swap(t_shell *head);
 /*
 **	Errors functions
 */
 long				ft_atol(char *s);
 int					check_digit(char *s);
-int					flush(s_stack *lst, int x);
-void				error_duplicate(s_stack *lst, int x, int y);
+int					flush(t_stack *lst, int x);
+void				error_duplicate(t_stack *lst, int x, int y);
 /*
 **	Listwise functions
 */
-int					stack_list_len(s_stack *head);
-s_stack				*push_front_stack(s_stack *head, int i);
-s_stack				*push_back_stack(s_stack *head, int i);
-s_stack				*push_back_stack2(s_stack *head, int i);
-s_stack				*pop_elem(s_stack *src);
-void				free_lst(s_shell *head);
+int					l_len(t_stack *head);
+t_stack				*push_front_stack(t_stack *head, int i);
+t_stack				*push_back_stack(t_stack *head, int i);
+t_stack				*push_back_stack2(t_stack *head, int i);
+t_stack				*pop_elem(t_stack *src);
+int					free_lst(t_shell *head);
 /*
 **	Basics operations
 */
-int					ft_sa(s_shell *head);
-int					ft_sb(s_shell *head);
-int					ft_ss(s_shell *head);
-int					ft_pb(s_shell *head);
-int					ft_pa(s_shell *head);
+int					ft_sa(t_shell *head, int show);
+int					ft_sb(t_shell *head, int show);
+int					ft_ss(t_shell *head, int show);
+int					ft_pb(t_shell *head, int show);
+int					ft_pa(t_shell *head, int show);
 void				swap_int(int *a, int *b);
-int					ft_ra(s_shell *head);
-int					ft_rb(s_shell *head);
-int					ft_rr(s_shell *head);
-int					ft_rra(s_shell *head);
-int					ft_rrb(s_shell *head);
-int					ft_rrr(s_shell *head);
+int					ft_ra(t_shell *head, int show);
+int					ft_rb(t_shell *head, int show);
+int					ft_rr(t_shell *head, int show);
+int					ft_rra(t_shell *head, int show);
+int					ft_rrb(t_shell *head, int show);
+int					ft_rrr(t_shell *head, int show);
 /*
 **	Sort functions
 */
-int					ft_sorted(s_stack *head);
-int					ft_rev_sorted(s_stack *head);
+int					ft_sorted(t_stack *head);
+int					ft_rev_sorted(t_stack *head);
 /*
 **	Debug functions
 */
-void				show_list(s_shell *head);
+void				show_list(t_shell *head);
+
 #endif

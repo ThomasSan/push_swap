@@ -1,115 +1,131 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_fn.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 14:23:06 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 14:23:09 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		stack_list_len(s_stack *head)
+#include "push_swap.h"
+#include <stdio.h>
+
+int		l_len(t_stack *head)
 {
 	int i;
 
 	i = 0;
 	while (head)
 	{
-		head = head->next;
+		head = head->n;
 		i++;
 	}
 	return (i);
 }
 
-s_stack	*push_back_stack(s_stack *head, int i)
+t_stack	*push_back_stack(t_stack *head, int i)
 {
-	s_stack	*tmp;
-	s_stack	*new;
+	t_stack	*tmp;
+	t_stack	*new;
 
 	tmp = head;
-	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
+	if (!(new = (t_stack*)malloc(sizeof(t_stack))))
 		return (NULL);
-	new->next = NULL;
+	new->n = NULL;
 	new->prev = NULL;
 	new->nb = i;
 	if (tmp == NULL)
 		head = new;
 	else
 	{
-		while(tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		while (tmp->n)
+			tmp = tmp->n;
+		tmp->n = new;
 		new->prev = tmp;
 		head->prev = new;
 	}
 	return (head);
 }
 
-s_stack	*push_back_stack2(s_stack *head, int i)
+t_stack	*push_back_stack2(t_stack *head, int i)
 {
-	s_stack	*tmp;
-	s_stack	*new;
+	t_stack	*tmp;
+	t_stack	*new;
 
 	tmp = head;
-	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
+	if (!(new = (t_stack*)malloc(sizeof(t_stack))))
 		return (NULL);
-	new->next = NULL;
+	new->n = NULL;
 	new->prev = NULL;
 	new->nb = i;
 	if (tmp == NULL)
 		head = new;
 	else
 	{
-		while(tmp->next)
+		while (tmp->n)
 		{
 			error_duplicate(head, tmp->nb, i);
-			tmp = tmp->next;
+			tmp = tmp->n;
 		}
 		error_duplicate(head, tmp->nb, i);
-		tmp->next = new;
+		tmp->n = new;
 		new->prev = tmp;
 		head->prev = new;
 	}
 	return (head);
 }
 
-s_stack	*push_front_stack(s_stack *head, int i)
+t_stack	*push_front_stack(t_stack *head, int i)
 {
-	s_stack	*tmp;
-	s_stack	*new;
+	t_stack	*tmp;
+	t_stack	*new;
 
 	tmp = head;
-	if (!(new = (s_stack*)malloc(sizeof(s_stack))))
+	if (!(new = (t_stack*)malloc(sizeof(t_stack))))
 		return (NULL);
-	new->next = NULL;
+	new->n = NULL;
 	new->prev = NULL;
 	new->nb = i;
 	if (tmp == NULL)
 		head = new;
 	else
 	{
-		new->next = head;
+		new->n = head;
 		head->prev = new;
 		head = new;
 	}
 	return (head);
 }
 
-void	show_list(s_shell *head)
+void	show_list(t_shell *head)
 {
-	s_stack *tmpA = head->stackA;
-	s_stack *tmpB = head->stackB;
+	t_stack *tmp_a;
+	t_stack *tmp_b;
 
+	tmp_b = head->sb;
+	tmp_a = head->sa;
 	ft_putstr("A: ");
-	if (tmpA == NULL)
+	if (tmp_a == NULL)
 		ft_putstr("is empty\n");
-	while (tmpA)
+	while (tmp_a)
 	{
-		ft_putnbr(tmpA->nb);
+		ft_putnbr(tmp_a->nb);
 		ft_putchar(' ');
-		tmpA = tmpA->next;
+		printf("ptr %p\n", tmp_a);
+		tmp_a = tmp_a->n;
 	}
 	ft_putchar('\n');
 	ft_putstr("B: ");
-	if (tmpB == NULL)
+	if (tmp_b == NULL)
 		ft_putstr("is empty");
-	while (tmpB)
+	while (tmp_b)
 	{
-		ft_putnbr(tmpB->nb);
+		ft_putnbr(tmp_b->nb);
 		ft_putchar(' ');
-		tmpB = tmpB->next;
+		tmp_b = tmp_b->n;
 	}
 	ft_putchar('\n');
 }

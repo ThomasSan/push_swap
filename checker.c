@@ -1,27 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 13:00:36 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/08/06 13:00:39 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include "checker.h"
 #include "push_swap.h"
 #include <unistd.h>
+#include <stdio.h>
 
 int		get_index(char *s)
 {
-	int 				i;
-	static const char	*cmd[] = {"sa", "sb", "ss", "pb", "pa",
+	int					i;
+	static char	*cmd[] = {"sa", "sb", "ss", "pb", "pa",
 	"ra", "rb", "rr", "rra", "rrb", "rrr"};
 
 	i = 0;
-	while(i < 11)
+	while (i < 11)
 	{
 		if (ft_strcmp(cmd[i], s) == 0)
 			break ;
 		i++;
 	}
-	return i;
+	return (i);
 }
 
-void	ft_check(s_shell *head, char *s)
+void	ft_check(t_shell *head, char *s)
 {
-	int		(*fun_array[11])(s_shell *head);
+	int		(*fun_array[11])(t_shell *head, int show);
 	int		index;
 
 	fun_array[0] = ft_sa;
@@ -37,36 +50,69 @@ void	ft_check(s_shell *head, char *s)
 	fun_array[10] = ft_rrr;
 	index = get_index(s);
 	if (index < 11)
-		fun_array[index](head);
+		fun_array[index](head, 0);
 	else
 		ft_putendl_fd("Error", 2);
 }
 
-int		main(int argc, char *argv[])
+int		result(t_shell *head)
 {
-	s_shell		*head;
-	int			i;
-
-	i = 0;
-	if (argc == 2)
-		ft_strsplit(argv[1], ' ');
-	if (argc == 1 || !(head = (s_shell*)malloc(sizeof(s_shell*))))
-		return (0);
-	head->stackA = NULL;
-	head->stackB = NULL;
-	while (argv[++i])
-	{
-		if (check_digit(argv[i]) == -1)
-			return (flush(head->stackA, 0));
-		head->stackA = push_back_stack2(head->stackA, ft_atoi(argv[i]));
-	}
-	char *buff = NULL;
-	while (get_next_line(0, &buff))
-		ft_check(head, buff);
-	if (ft_sorted(head->stackA) && stack_list_len(head->stackB) == 0)
+	if (ft_sorted(head->sa) && l_len(head->sb) == 0)
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
+	return (0);
+}
+
+void	read_line(t_shell *head)
+{
+	char		*buff;
+
+	buff = NULL;
+	while (get_next_line(0, &buff))
+	{
+		ft_check(head, buff);
+		free(buff);
+	}
+}
+
+void	free_array(char **argv)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	tmp = argv;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(tmp);
+}
+
+int		main(int argc, char **argv)
+{
+	t_shell		*head;
+	int			i;
+
+ 	i = argc == 2 ? 0 : 1;
+	if (argc == 2) 
+		argv = ft_strsplit(argv[1], ' ');
+	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell*))))
+		return (0);
+	head->sa = NULL;
+	head->sb = NULL;
+	while (argv[i])
+	{
+		if (check_digit(argv[i]) == -1)
+			return (flush(head->sa, 0));
+		head->sa = push_back_stack2(head->sa, ft_atoi(argv[i++]));
+	}
+	read_line(head);
+	result(head);
 	free_lst(head);
+	if (argc == 2)
+		free_array(argv);
 	return (0);
 }
