@@ -45,7 +45,7 @@ clean:
 	@rm -rf obj
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(NAME2)
 
 re: fclean all
 

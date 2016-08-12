@@ -20,13 +20,19 @@ int		free_lst(t_shell *head)
 	while (head->sa)
 	{
 		tmp = head->sa;
+		head->sa = head->sa->n;
 		free(tmp);
 		tmp = NULL;
-		head->sa = head->sa->n;
+	}
+	while (head->sb)
+	{
+		tmp = head->sb;
+		head->sb = head->sb->n;
+		free(tmp);
+		tmp = NULL;
 	}
 	head->sa = NULL;
 	head->sb = NULL;
-	free(head);
 	head = NULL;
 	return (0);
 }
@@ -49,7 +55,7 @@ void	push_swap_suite(t_shell *head)
 				l_nb(head->sb) > head->sb->nb)
 			ft_rrb(head, 1);
 		ft_pa(head, 1);
-		if (l_len(head->sb) > 1 &&
+		if (l_len(head->sb) > 1 && l_len(head->sa) > 1 && 
 head->sa->nb > head->sa->n->nb && head->sb->nb < head->sb->n->nb)
 			ft_ss(head, 1);
 		else

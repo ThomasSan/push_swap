@@ -11,7 +11,21 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
+void	free_array(char **argv)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	tmp = argv;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(tmp);
+}
 
 int		main(int argc, char **argv)
 {
@@ -21,12 +35,11 @@ int		main(int argc, char **argv)
 	i = argc == 2 ? 0: 1;
 	if (argc == 2)
 		argv = ft_strsplit(argv[1], ' ');
-	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell*))))
+	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell))))
 		return (0);
 	head->sa = NULL;
 	head->sb = NULL;
 	head->max = -2147483648;
-	head->min = 2147483647;
 	while (argv[i])
 	{
 		if (check_digit(argv[i]) == -1)
@@ -38,6 +51,8 @@ int		main(int argc, char **argv)
 	while (ft_sorted(head->sa) == 0)
 		push_swap(head);
 	free_lst(head);
-	while (1);
+	free(head);
+	if (argc == 2)
+		free_array(argv);
 	return (0);
 }

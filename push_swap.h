@@ -47,11 +47,12 @@ void				error_duplicate(t_stack *lst, int x, int y);
 **	Listwise functions
 */
 int					l_len(t_stack *head);
+int					free_lst(t_shell *head);
 t_stack				*push_front_stack(t_stack *head, int i);
 t_stack				*push_back_stack(t_stack *head, int i);
 t_stack				*push_back_stack2(t_stack *head, int i);
 t_stack				*pop_elem(t_stack *src);
-int					free_lst(t_shell *head);
+t_stack				*ptr_to_lst(t_stack *stack);
 /*
 **	Basics operations
 */
@@ -70,6 +71,7 @@ int					ft_rrr(t_shell *head, int show);
 /*
 **	Sort functions
 */
+void				swap_int(int *a, int *b);
 int					ft_sorted(t_stack *head);
 int					ft_rev_sorted(t_stack *head);
 /*
