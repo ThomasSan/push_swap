@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/06 14:23:54 by tsanzey           #+#    #+#             */
-/*   Updated: 2016/08/06 14:28:36 by tsanzey          ###   ########.fr       */
+/*   Created: 2015/12/15 11:03:56 by tsanzey           #+#    #+#             */
+/*   Updated: 2015/12/15 11:03:58 by tsanzey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "get_next_line.h"
-#include "libft/libft.h"
-#include <stdio.h>
-
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
@@ -62,17 +53,21 @@ char	*del_line(char *s, int i)
 	int		j;
 	char	*tmp;
 
-	tmp = (char *)malloc(sizeof(char *) * (ft_strlen(s) - i));
-	j = 0;
-	if (!tmp)
-		return (NULL);
-	while (s[i] != '\0')
+	tmp = NULL;
+	if (ft_strlen(s) - i > 0)
 	{
-		tmp[j] = s[i];
-		j++;
-		i++;
+		tmp = (char *)malloc(sizeof(char *) * (ft_strlen(s) - i));
+		j = 0;
+		if (!tmp)
+			return (NULL);
+		while (s[i] != '\0')
+		{
+			tmp[j] = s[i];
+			j++;
+			i++;
+		}
+		tmp[j] = '\0';
 	}
-	tmp[j] = '\0';
 	if (s)
 		free(s);
 	return (tmp);
@@ -93,13 +88,13 @@ int		get_line_len(int const fd, char **dst)
 			return (-2);
 		buf[ret] = '\0';
 		tmp1 = *dst;
-		if (*dst == NULL)
+		if (*dst == NULL && buf[0])
 			*dst = ft_strdup(buf);
-		else
+		else if (*dst)
 			*dst = ft_strjoin(*dst, buf);
 		free(tmp1);
 	}
-	if (ret == 0 && i == -1 && ft_strcmp("", *dst))
+	if (ret == 0 && i == -1 && *dst && ft_strcmp("", *dst))
 	{
 		*dst = ft_strjoin(*dst, "\n");
 		i = (ft_strlen(*dst) - 1);
