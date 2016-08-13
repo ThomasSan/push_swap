@@ -54,6 +54,5 @@ int		main(int argc, char **argv)
 	free_lst(head);
 	if (argc == 2)
 		free_array(argv, head);
-	while (1);
 	return (0);
 }

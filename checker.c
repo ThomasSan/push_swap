@@ -109,6 +109,5 @@ int		main(int argc, char **argv)
 	free(head);
 	if (argc == 2)
 		free_array(argv);
-	while (1);
 	return (0);
 }
