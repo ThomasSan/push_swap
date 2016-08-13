@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int		free_lst(t_shell *head)
 {
@@ -55,7 +54,7 @@ void	push_swap_suite(t_shell *head)
 				l_nb(head->sb) > head->sb->nb)
 			ft_rrb(head, 1);
 		ft_pa(head, 1);
-		if (l_len(head->sb) > 1 && l_len(head->sa) > 1 && 
+		if (l_len(head->sb) > 1 && l_len(head->sa) > 1 &&
 head->sa->nb > head->sa->n->nb && head->sb->nb < head->sb->n->nb)
 			ft_ss(head, 1);
 		else

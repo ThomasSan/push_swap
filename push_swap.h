@@ -39,6 +39,7 @@ void				push_swap(t_shell *head);
 /*
 **	Errors functions
 */
+int					result(t_shell *head);
 long				ft_atol(char *s);
 int					check_digit(char *s);
 int					flush(t_stack *lst, int x);

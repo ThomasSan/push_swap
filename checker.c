@@ -14,11 +14,10 @@
 #include "checker.h"
 #include "push_swap.h"
 #include <unistd.h>
-#include <stdio.h>
 
 int		get_index(char *s)
 {
-	int					i;
+	int			i;
 	static char	*cmd[] = {"sa", "sb", "ss", "pb", "pa",
 	"ra", "rb", "rr", "rra", "rrb", "rrr"};
 
@@ -32,7 +31,7 @@ int		get_index(char *s)
 	return (i);
 }
 
-void	ft_check(t_shell *head, char *s)
+int		ft_check(t_shell *head, char *s)
 {
 	int		(*fun_array[11])(t_shell *head, int show);
 	int		index;
@@ -52,16 +51,11 @@ void	ft_check(t_shell *head, char *s)
 	if (index < 11)
 		fun_array[index](head, 0);
 	else
+	{
 		ft_putendl_fd("Error", 2);
-}
-
-int		result(t_shell *head)
-{
-	if (ft_sorted(head->sa) && l_len(head->sb) == 0)
-		ft_putendl("OK");
-	else
-		ft_putendl("KO");
-	return (0);
+		return (-1);
+	}
+	return (1);
 }
 
 void	read_line(t_shell *head)
@@ -96,8 +90,8 @@ int		main(int argc, char **argv)
 	t_shell		*head;
 	int			i;
 
- 	i = argc == 2 ? 0 : 1;
-	if (argc == 2) 
+	i = argc == 2 ? 0 : 1;
+	if (argc == 2)
 		argv = ft_strsplit(argv[1], ' ');
 	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell*))))
 		return (0);
@@ -112,7 +106,9 @@ int		main(int argc, char **argv)
 	read_line(head);
 	result(head);
 	free_lst(head);
+	free(head);
 	if (argc == 2)
 		free_array(argv);
+	while (1);
 	return (0);
 }

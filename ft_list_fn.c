@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int		l_len(t_stack *head)
 {
@@ -114,7 +113,6 @@ void	show_list(t_shell *head)
 	{
 		ft_putnbr(tmp_a->nb);
 		ft_putchar(' ');
-		printf("ptr %p\n", tmp_a);
 		tmp_a = tmp_a->n;
 	}
 	ft_putchar('\n');

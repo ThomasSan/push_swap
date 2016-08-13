@@ -14,10 +14,13 @@
 
 int	ft_ra(t_shell *head, int show)
 {
+	int	tmp;
+
 	if (l_len(head->sa) <= 1)
 		return (-1);
-	head->sa = push_back_stack(head->sa, head->sa->nb);
+	tmp = head->sa->nb;
 	head->sa = pop_elem(head->sa);
+	head->sa = push_back_stack(head->sa, tmp);
 	if (show)
 		ft_putendl("ra");
 	return (1);
@@ -25,10 +28,13 @@ int	ft_ra(t_shell *head, int show)
 
 int	ft_rb(t_shell *head, int show)
 {
+	int	tmp;
+
 	if (l_len(head->sb) <= 1)
 		return (-1);
-	head->sb = push_back_stack(head->sb, head->sb->nb);
+	tmp = head->sb->nb;
 	head->sb = pop_elem(head->sb);
+	head->sb = push_back_stack(head->sb, tmp);
 	if (show)
 		ft_putendl("rb");
 	return (1);

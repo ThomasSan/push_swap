@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	error_duplicate(t_stack *lst, int x, int y)
 {
@@ -26,6 +25,15 @@ int		ft_isdigitx(int c)
 {
 	if ((c >= '0' && c <= '9') || c == '-')
 		return (1);
+	return (0);
+}
+
+int		result(t_shell *head)
+{
+	if (ft_sorted(head->sa) && l_len(head->sb) == 0)
+		ft_putendl("OK");
+	else
+		ft_putendl("KO");
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 /*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 14:45:56 by tsanzey           #+#    #+#             */
-/*   Updated: 2016/08/06 14:45:57 by tsanzey          ###   ########.fr       */
+/*   Updated: 2016/08/13 11:44:43 by tsanzey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_array(char **argv)
+void	free_array(char **argv, t_shell *head)
 {
 	int		i;
 	char	**tmp;
@@ -25,6 +25,7 @@ void	free_array(char **argv)
 		i++;
 	}
 	free(tmp);
+	free(head);
 }
 
 int		main(int argc, char **argv)
@@ -32,7 +33,7 @@ int		main(int argc, char **argv)
 	t_shell		*head;
 	int			i;
 
-	i = argc == 2 ? 0: 1;
+	i = argc == 2 ? 0 : 1;
 	if (argc == 2)
 		argv = ft_strsplit(argv[1], ' ');
 	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell))))
@@ -51,8 +52,8 @@ int		main(int argc, char **argv)
 	while (ft_sorted(head->sa) == 0)
 		push_swap(head);
 	free_lst(head);
-	free(head);
 	if (argc == 2)
-		free_array(argv);
+		free_array(argv, head);
+	while (1);
 	return (0);
 }

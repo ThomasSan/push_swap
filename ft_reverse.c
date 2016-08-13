@@ -28,7 +28,6 @@ int		ft_rra(t_shell *head, int show)
 	tmp = ptr_to_lst(head->sa);
 	head->sa = push_front_stack(head->sa, tmp->nb);
 	tmp->prev->n = NULL;
-	tmp = NULL;
 	free(tmp);
 	if (show)
 		ft_putendl("rra");
@@ -44,7 +43,6 @@ int		ft_rrb(t_shell *head, int show)
 	tmp = ptr_to_lst(head->sb);
 	head->sb = push_front_stack(head->sb, tmp->nb);
 	tmp->prev->n = NULL;
-	tmp = NULL;
 	free(tmp);
 	if (show)
 		ft_putendl("rrb");
