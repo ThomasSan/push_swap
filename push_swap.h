@@ -30,12 +30,21 @@ typedef	struct		s_shell
 	struct s_stack	*sb;
 	int				min;
 	int				max;
+	int				med;
 }					t_shell;
 
 /*
 **	Main functions
 */
+void				q_sort(t_shell *head);
 void				push_swap(t_shell *head);
+/*
+**	Median functions
+*/
+int 				get_median(char **array, int ac);
+int					get_len(char **array, int ac);
+int					*fill_array2(t_stack *head, int len);
+int					*sort_array(int *array, int size);
 /*
 **	Errors functions
 */
@@ -47,6 +56,7 @@ void				error_duplicate(t_stack *lst, int x, int y);
 /*
 **	Listwise functions
 */
+int					l_nb(t_stack *head);
 int					l_len(t_stack *head);
 int					free_lst(t_shell *head);
 t_stack				*push_front_stack(t_stack *head, int i);

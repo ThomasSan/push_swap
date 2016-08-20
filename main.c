@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	free_array(char **argv, t_shell *head)
 {
@@ -28,6 +29,7 @@ void	free_array(char **argv, t_shell *head)
 	free(head);
 }
 
+
 int		main(int argc, char **argv)
 {
 	t_shell		*head;
@@ -40,19 +42,25 @@ int		main(int argc, char **argv)
 		return (0);
 	head->sa = NULL;
 	head->sb = NULL;
-	head->max = -2147483648;
 	while (argv[i])
 	{
 		if (check_digit(argv[i]) == -1)
 			return (flush(head->sa, 0));
 		head->sa = push_back_stack2(head->sa, ft_atoi(argv[i]));
-		head->max = ft_atoi(argv[i]) > head->max ? ft_atoi(argv[i]) : head->max;
 		i++;
 	}
-	while (ft_sorted(head->sa) == 0)
-		push_swap(head);
+	head->med = get_median(argv, argc);
+	q_sort(head);
+	while (ft_sorted(head->sa) == 0 || l_len(head->sb)) 
+	{
+		q_sort(head);
+	}
+	// show_list(head);
 	free_lst(head);
 	if (argc == 2)
 		free_array(argv, head);
 	return (0);
 }
+
+
+// ARG=`ruby -e "puts (0..10).to_a.shuffle.join(' ')"` ; echo $ARG ; ./push_swap $ARG
