@@ -62,5 +62,5 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
-
+//196 : 718
 // ARG=`ruby -e "puts (0..10).to_a.shuffle.join(' ')"` ; echo $ARG ; ./push_swap $ARG

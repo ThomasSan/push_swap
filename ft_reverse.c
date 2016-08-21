@@ -54,7 +54,6 @@ int		ft_rrr(t_shell *head, int show)
 	t_stack *tmp_a;
 	t_stack *tmp_b;
 
-	(void)show;
 	tmp_a = ptr_to_lst(head->sa);
 	tmp_b = ptr_to_lst(head->sb);
 	head->sa = push_front_stack(head->sa, tmp_a->nb);
@@ -65,5 +64,7 @@ int		ft_rrr(t_shell *head, int show)
 	tmp_b = NULL;
 	free(tmp_a);
 	free(tmp_b);
+	if (show)
+		ft_putendl("rrr");
 	return (1);
 }

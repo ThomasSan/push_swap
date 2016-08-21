@@ -50,11 +50,24 @@ int			get_new_med(t_stack *head)
 	free(arr);
 	return (ret);
 }
+void		wat_todo2(t_shell *head)
+{
+	if (l_len(head->sb) > 1 && l_len(head->sa) > 1 &&
+		head->sb->nb < head->sb->n->nb &&
+		head->sa->nb > head->sa->n->nb)
+		ft_ss(head, 1);
+	else if (l_len(head->sb) > 1 && 
+		head->sb->nb < head->sb->n->nb)
+		ft_sb(head, 1);
+	else if (l_len(head->sa) > 1 &&
+		head->sa->nb > head->sa->n->nb)
+		ft_sa(head, 1);
+}
 
 void		q_sort2(t_shell *head)
 {
-	if (l_nb(head->sb) == head->med)
-		ft_rrb(head, 1);
+	// if (l_nb(head->sb) == head->med)
+	// 	ft_rrb(head, 1);
 	head->med = get_new_med(head->sb);
 	while (head->sb && !leftsmaller(head->sb, head->med))
 	{
@@ -72,18 +85,16 @@ void		q_sort2(t_shell *head)
 			ft_sb(head, 1);
 		else if (head->sb->nb > head->med)
 		{
+			// if (!leftsmaller(head->sb, head->med) &&
+			// head->sa->nb == head->med)
+			// 	ft_ra(head, 1);
 			ft_pa(head, 1);
-			if (head->sa->nb > head->sa->n->nb)
-				ft_sa(head, 1);
+			wat_todo2(head);
 		}
 		else if (head->sb->nb < head->med)
 			ft_rb(head, 1);
 		else
-		{
 			ft_pa(head, 1);
-			if (!leftsmaller(head->sb, head->med))
-				ft_ra(head, 1);
-		}
 		if (l_len(head->sb) > 1 && leftsmaller(head->sb, head->med))
 		{
 			if (l_nb(head->sa) == head->med)
@@ -97,7 +108,8 @@ void		q_sort2(t_shell *head)
 
 void		wat_todo(t_shell *head)
 {
-	if (l_nb(head->sb) > head->sb->nb && l_nb(head->sb) != head->med)
+	if (l_nb(head->sb) > head->sb->nb && 
+		l_nb(head->sb) != head->med)
 	{
 		if (head->sa->nb > head->med)
 			ft_rr(head, 1);
@@ -106,11 +118,35 @@ void		wat_todo(t_shell *head)
 	}
 	if (l_len(head->sb) > 1 && head->sb->nb < head->sb->n->nb)
 	{
-		if (head->sa->nb > head->sa->n->nb)
+		if (l_len(head->sa) > 1 && head->sa->nb > head->sa->n->nb)
 			ft_ss(head, 1);
 		else
 			ft_sb(head, 1);
 	}
+}
+
+void		first_bigger(t_shell *head)
+{
+	// if (l_len(head->sa) > 1 && head->sa->nb > head->med &&
+	// 	head->sa->n->nb > head->med && head->sa->nb > head->sa->n->nb
+	// 	&& l_nb(head->sa) > head->med)
+	// 	ft_sa(head, 1);
+	if (head->sa->nb > head->med && l_len(head->sb) > 1 &&
+		head->sb->nb == head->med && !rightbigger(head->sa, head->med))
+		ft_rr(head, 1);
+	else if (head->sa->nb > head->med)
+		ft_ra(head, 1);
+	else
+		ft_rb(head, 1);
+}
+
+void		which_rr(t_shell *head)
+{
+	if (l_nb(head->sb) == head->med && l_len(head->sa) > 1
+		&& l_nb(head->sa) < head->sa->nb)
+		ft_rrr(head, 1);
+	else if (l_nb(head->sb) == head->med)
+		ft_rrb(head, 1);
 }
 
 void		q_sort(t_shell *head)
@@ -120,28 +156,25 @@ void		q_sort(t_shell *head)
 	{
 		// show_list(head);
 		// printf("med->sort %d\n", head->med);
-		// if (head->sa->nb > head->sa->n->nb)
-		// 	ft_sa(head, 1);
 		if (ft_sorted(head->sa) && rightbigger(head->sa, head->med))
 			q_sort2(head) ;
-		if (head->sa->nb > head->med)
-				ft_ra(head, 1);
+		if (l_len(head->sa) > 1 && l_nb(head->sa) < head->med
+			&& l_nb(head->sa) < head->sa->nb && l_nb(head->sa) < head->sa->n->nb)
+			ft_rra(head, 1);
+		else if (head->sa->nb > head->med)
+			first_bigger(head);
 		else if (head->sa->nb < head->med)
 		{
 			ft_pb(head, 1);
 			wat_todo(head);
 		}
 		else if (!rightbigger(head->sa, head->med))
-		{
 			ft_pb(head, 1);
-			ft_rb(head, 1);
-		}
 		if (l_len(head->sa) == 2 && !ft_sorted(head->sa))
 			ft_sa(head, 1);
 		if (!ft_sorted(head->sa) && rightbigger(head->sa, head->med))
 		{
-			if (l_nb(head->sb) == head->med)
-				ft_rrb(head, 1);
+			which_rr(head);
 			if (ft_rev_sorted(head->sb))
 				head->med = get_new_med(head->sa);
 			else
