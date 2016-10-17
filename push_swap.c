@@ -148,12 +148,12 @@ void	rb_or_rr(t_shell *head)
 
 void	rempile(t_shell *head)
 {
-	// show_list(head);
+	show_list(head);
 	if (l_nb(head->sa) > head->sa->nb)
 		ft_rra(head, 1);
 	while (l_len(head->sb) > 1)
 	{
-		// show_list(head);
+		show_list(head);
 		if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
 			rb_or_rr(head);
 		if ((head->sb->nb > head->sb->n->nb) && (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min))
@@ -164,8 +164,11 @@ void	rempile(t_shell *head)
 			ft_sa(head, 1);
 		while (is_bigger(head->sa, head->sb->nb, head->min))
 		{
-			// show_list(head);
-			ft_rb(head, 1);
+			show_list(head);
+			if (l_nb(head->sb) < head->sb->nb && l_nb(head->sb) < head->sa->nb && l_nb(head->sb) < head->sa->n->nb)
+				ft_rrb(head, 1);
+			else
+				ft_rb(head, 1);
 		}
 		ft_pa(head, 1);
 		if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
@@ -177,7 +180,7 @@ void	rempile(t_shell *head)
 		}
 		while (is_smallest(head->sb, head->sa->nb) && !ft_sorted(head->sa))
 		{
-			// show_list(head);
+			show_list(head);
 			if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min && head->sa->nb != head->min)
 				ft_sa(head, 1);
 			if (l_nb(head->sa) > head->sa->nb && head->sa->nb != head->min)
@@ -186,6 +189,8 @@ void	rempile(t_shell *head)
 				ft_sa(head, 1);
 			}
 			if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
+				ft_rr(head, 1);
+			else if (is_bigger(head->sa, head->sb->nb, head->min))
 				ft_rr(head, 1);
 			else
 				ft_ra(head, 1);
@@ -212,7 +217,7 @@ void	push_swap(t_shell *h, int x)
 	i = len;
 	while (i)
 	{
-		// show_list(h);
+		show_list(h);
 		if (is_in_array(h->sa->nb, biggest, len) && is_in_array(h->sa->n->nb, biggest, len) && h->sa->n->nb > h->sa->nb)
 			ft_sa(h, 1);
 		if (is_in_array(h->sa->nb, biggest, len))
@@ -225,7 +230,7 @@ void	push_swap(t_shell *h, int x)
 		sort_b_list(h, biggest, len);
 	}
 	rempile(h);
-	// show_list(h);
+	show_list(h);
 	if (x == -1)
 		push_swap(h, biggest[len-1]);
 	if (h->sa->nb > l_nb(h->sa))

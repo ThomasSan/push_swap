@@ -50,7 +50,6 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	head->med = get_median(argv, argc);
-	// while (ft_sorted(head->sa) == 0)
 	push_swap(head, -1);
 	// show_list(head);
 	free_lst(head);
