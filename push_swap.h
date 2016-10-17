@@ -37,7 +37,7 @@ typedef	struct		s_shell
 **	Main functions
 */
 void				q_sort(t_shell *head);
-void				push_swap(t_shell *head);
+void				push_swap(t_shell *head, int x);
 /*
 **	Median functions
 */

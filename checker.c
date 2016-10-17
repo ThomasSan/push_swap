@@ -14,6 +14,7 @@
 #include "checker.h"
 #include "push_swap.h"
 #include <unistd.h>
+#include <stdio.h>
 
 int		get_index(char *s)
 {
@@ -91,7 +92,7 @@ int		main(int argc, char **argv)
 	int			i;
 
 	i = argc == 2 ? 0 : 1;
-	if (argc == 2)
+	if (argc == 2 && ft_strcmp(argv[1], "") != 0)
 		argv = ft_strsplit(argv[1], ' ');
 	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell*))))
 		return (0);

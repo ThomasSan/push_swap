@@ -21,9 +21,11 @@ void	error_duplicate(t_stack *lst, int x, int y)
 	}
 }
 
-int		ft_isdigitx(int c)
+int		ft_isdigitx(int c, int i)
 {
-	if ((c >= '0' && c <= '9') || c == '-')
+	if ((c >= '0' && c <= '9'))
+		return (1);
+	if (c == '-' && i == 0)
 		return (1);
 	return (0);
 }
@@ -46,9 +48,11 @@ int		check_digit(char *s)
 	nb = ft_atol(s);
 	if (nb > 2147483647 || nb < -2147483648)
 		return (-1);
+	if (ft_strcmp(s, "-") == 0)
+		return (-1);
 	while (s[i])
 	{
-		if (ft_isdigitx(s[i]) == 0)
+		if (ft_isdigitx(s[i], i) == 0)
 			return (-1);
 		i++;
 	}

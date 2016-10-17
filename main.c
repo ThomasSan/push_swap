@@ -50,17 +50,11 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	head->med = get_median(argv, argc);
-	q_sort(head);
-	while (ft_sorted(head->sa) == 0 || l_len(head->sb)) 
-	{
-		q_sort(head);
-	}
+	// while (ft_sorted(head->sa) == 0)
+	push_swap(head, -1);
 	// show_list(head);
 	free_lst(head);
 	if (argc == 2)
 		free_array(argv, head);
 	return (0);
 }
-
-//196 : 718
-// ARG=`ruby -e "puts (0..10).to_a.shuffle.join(' ')"` ; echo $ARG ; ./push_swap $ARG
