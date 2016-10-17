@@ -131,7 +131,7 @@ int		is_smallest(t_stack *list, int n)
 
 int		is_bigger(t_stack *list, int n, int min)
 {
-	if (list->nb < min || list->n->nb == min)
+	if (list->nb == min || list->n->nb == min)
 		return (0);
 	if (list->nb < n && list->n->nb < n)
 		return (1);
@@ -140,7 +140,7 @@ int		is_bigger(t_stack *list, int n, int min)
 
 void	rb_or_rr(t_shell *head)
 {
-	if (is_smallest(head->sb, head->sa->nb))
+	if (is_smallest(head->sb, head->sa->nb) && head->sa->nb != head->min)
 		ft_rr(head, 1);
 	else
 		ft_rb(head, 1);
@@ -148,6 +148,7 @@ void	rb_or_rr(t_shell *head)
 
 void	rempile(t_shell *head)
 {
+	// show_list(head);
 	if (l_nb(head->sa) > head->sa->nb)
 		ft_rra(head, 1);
 	while (l_len(head->sb) > 1)
@@ -167,25 +168,23 @@ void	rempile(t_shell *head)
 			ft_rb(head, 1);
 		}
 		ft_pa(head, 1);
-		if (head->sa->nb > head->sa->n->nb)
+		if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
 		{
 			if (head->sb->nb > head->sb->n->nb)
 				ft_ss(head, 1);
 			else
 				ft_sa(head, 1);
 		}
-		while (is_smallest(head->sb, head->sa->nb))
+		while (is_smallest(head->sb, head->sa->nb) && !ft_sorted(head->sa))
 		{
 			// show_list(head);
-			if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
+			if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min && head->sa->nb != head->min)
+				ft_sa(head, 1);
+			if (l_nb(head->sa) > head->sa->nb && head->sa->nb != head->min)
 			{
+				ft_rra(head, 1);
 				ft_sa(head, 1);
 			}
-			// if (l_nb(head->sa) > head->sa->nb)
-			// {
-			// 	ft_rra(head, 1);
-			// 	ft_sa(head, 1);
-			// }
 			if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
 				ft_rr(head, 1);
 			else
@@ -193,7 +192,7 @@ void	rempile(t_shell *head)
 		}
 	}
 	ft_pa(head, 1);
-	if (head->sa->nb > head->sa->n->nb)
+	if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
 		ft_sa(head, 1);
 	ft_ra(head, 1);
 }
