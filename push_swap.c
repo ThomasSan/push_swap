@@ -156,6 +156,35 @@ void	which_swap(t_shell *head)
 		ft_sa(head, 1);
 }
 
+
+int		where_is_next(t_shell *head)
+{
+	int		len;
+	int		min;
+	int		index;
+	int		i;
+	t_stack	*tmp;
+
+	min = INT_MAX;
+	len = l_len(head->sb);
+	i = 0;
+	tmp = head->sb;
+	while(tmp)
+	{
+		if (min > tmp->nb)
+		{
+			min = tmp->nb;
+			index = i;
+		}
+		i++;
+		tmp = tmp->n;
+	}
+	if (index > (len / 2))
+		return (0);
+	else
+		return (1);
+}
+
 void	rempile(t_shell *head)
 {
 	// show_list(head);
@@ -170,10 +199,14 @@ void	rempile(t_shell *head)
 		while (is_bigger(head->sa, head->sb->nb, head->min))
 		{
 			// show_list(head);
-			if (l_nb(head->sb) < head->sb->nb && l_nb(head->sb) < head->sa->nb && l_nb(head->sb) < head->sa->n->nb)
-				ft_rrb(head, 1);
-			else
+			// if (l_nb(head->sb) < head->sb->nb && l_nb(head->sb) < head->sa->nb && l_nb(head->sb) < head->sa->n->nb)
+			// 	ft_rrb(head, 1);
+			// else
+			// 	ft_rb(head, 1);
+			if (where_is_next(head) == 1)
 				ft_rb(head, 1);
+			else
+				ft_rrb(head, 1);
 		}
 		ft_pa(head, 1);
 		if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
@@ -195,8 +228,8 @@ void	rempile(t_shell *head)
 			}
 			if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
 				ft_rr(head, 1);
-			else if (is_bigger(head->sa, head->sb->nb, head->min))
-				ft_rr(head, 1);
+			// else if (l_len(head->sb) > 2 && is_smallest(head->sb, head->sb->n->nb))
+			// 	ft_rr(head, 1);
 			else
 				ft_ra(head, 1);
 		}
@@ -217,7 +250,7 @@ void	push_swap(t_shell *h, int x)
 	len /= 2;
 	biggest = get_biggest(h->sa, len, x);
 	// show_array(biggest, len);
-	if (x == -1)
+	if (x == INT_MIN)
 		h->min = biggest[0];
 	i = len;
 	while (i)
@@ -236,7 +269,7 @@ void	push_swap(t_shell *h, int x)
 	}
 	rempile(h);
 	// show_list(h);
-	if (x == -1)
+	if (x == INT_MIN)
 		push_swap(h, biggest[len-1]);
 	while (h->sa->nb > l_nb(h->sa))
 		ft_ra(h, 1);

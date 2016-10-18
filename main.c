@@ -50,7 +50,7 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	head->len = l_len(head->sa);
-	push_swap(head, -1);
+	push_swap(head, INT_MIN);
 	// show_list(head);
 	free_lst(head);
 	if (argc == 2)
