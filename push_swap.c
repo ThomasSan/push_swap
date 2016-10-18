@@ -185,6 +185,33 @@ int		where_is_next(t_shell *head)
 		return (1);
 }
 
+void	while_smallest(t_shell *head)
+{
+	// show_list(head);
+	if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min && head->sa->nb != head->min)
+		ft_sa(head, 1);
+	if (l_nb(head->sa) > head->sa->nb && head->sa->nb != head->min)
+	{
+		ft_rra(head, 1);
+		ft_sa(head, 1);
+	}
+	if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
+		ft_rr(head, 1);
+	// else if (l_len(head->sb) > 2 && is_smallest(head->sb, head->sb->n->nb))
+	// 	ft_rr(head, 1);
+	else
+		ft_ra(head, 1);
+}
+
+void	while_bigger(t_shell *head)
+{
+	// show_list(head);
+	if (where_is_next(head) == 1)
+		ft_rb(head, 1);
+	else
+		ft_rrb(head, 1);
+}
+
 void	rempile(t_shell *head)
 {
 	// show_list(head);
@@ -195,19 +222,8 @@ void	rempile(t_shell *head)
 		// show_list(head);
 		if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
 			rb_or_rr(head);
-		// which_swap(head);
 		while (is_bigger(head->sa, head->sb->nb, head->min))
-		{
-			// show_list(head);
-			// if (l_nb(head->sb) < head->sb->nb && l_nb(head->sb) < head->sa->nb && l_nb(head->sb) < head->sa->n->nb)
-			// 	ft_rrb(head, 1);
-			// else
-			// 	ft_rb(head, 1);
-			if (where_is_next(head) == 1)
-				ft_rb(head, 1);
-			else
-				ft_rrb(head, 1);
-		}
+			while_bigger(head);
 		ft_pa(head, 1);
 		if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
 		{
@@ -217,22 +233,7 @@ void	rempile(t_shell *head)
 				ft_sa(head, 1);
 		}
 		while (is_smallest(head->sb, head->sa->nb) && !ft_sorted(head->sa))
-		{
-			// show_list(head);
-			if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min && head->sa->nb != head->min)
-				ft_sa(head, 1);
-			if (l_nb(head->sa) > head->sa->nb && head->sa->nb != head->min)
-			{
-				ft_rra(head, 1);
-				ft_sa(head, 1);
-			}
-			if (l_len(head->sb) > 2 && head->sb->nb > head->sb->n->nb && head->sb->nb > head->sb->n->n->nb)
-				ft_rr(head, 1);
-			// else if (l_len(head->sb) > 2 && is_smallest(head->sb, head->sb->n->nb))
-			// 	ft_rr(head, 1);
-			else
-				ft_ra(head, 1);
-		}
+			while_smallest(head);
 	}
 	ft_pa(head, 1);
 	if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
