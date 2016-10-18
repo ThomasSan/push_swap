@@ -31,6 +31,7 @@ typedef	struct		s_shell
 	int				min;
 	int				max;
 	int				med;
+	int				len;
 }					t_shell;
 
 /*

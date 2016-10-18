@@ -49,7 +49,7 @@ int		main(int argc, char **argv)
 		head->sa = push_back_stack2(head->sa, ft_atoi(argv[i]));
 		i++;
 	}
-	head->med = get_median(argv, argc);
+	head->len = l_len(head->sa);
 	push_swap(head, -1);
 	// show_list(head);
 	free_lst(head);
