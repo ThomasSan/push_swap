@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-void	free_array(char **argv, t_shell *head)
+void	free_array(char **argv)
 {
 	int		i;
 	char	**tmp;
@@ -26,9 +26,14 @@ void	free_array(char **argv, t_shell *head)
 		i++;
 	}
 	free(tmp);
-	free(head);
 }
 
+void	init_head(t_shell *head)
+{
+	head->sa = NULL;
+	head->sb = NULL;
+	head->max = INT_MIN;
+}
 
 int		main(int argc, char **argv)
 {
@@ -40,9 +45,7 @@ int		main(int argc, char **argv)
 		argv = ft_strsplit(argv[1], ' ');
 	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell))))
 		return (0);
-	head->sa = NULL;
-	head->sb = NULL;
-	head->max = INT_MIN;
+	init_head(head);
 	while (argv[i])
 	{
 		if (check_digit(argv[i]) == -1)
@@ -53,10 +56,9 @@ int		main(int argc, char **argv)
 	}
 	head->len = l_len(head->sa);
 	which_swap(head);
-	// show_list(head);
 	free_lst(head);
 	if (argc == 2)
-		free_array(argv, head);
+		free_array(argv);
 	if (head)
 		free(head);
 	return (0);

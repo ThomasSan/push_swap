@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   select.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 14:20:42 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 14:20:45 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
@@ -47,9 +59,8 @@ void	small_swap(t_shell *h)
 {
 	while (l_len(h->sa) > 1)
 	{
-		// show_list(h);
-		if (l_len(h->sb) > 1 && h->sa->nb > h->sa->n->nb
-	&& h->sb->nb < h->sb->n->nb)
+		if (l_len(h->sb) > 1 && h->sa->nb > h->sa->n->nb &&
+h->sb->nb < h->sb->n->nb)
 			ft_ss(h, 1);
 		else if (h->sa->nb > h->sa->n->nb)
 			ft_sa(h, 1);
@@ -76,7 +87,7 @@ l_nb(h->sa) < h->sa->nb && l_nb(h->sa) < h->sa->n->nb)
 void	which_swap(t_shell *head)
 {
 	if (l_len(head->sa) >= 40)
-		push_swap(head, INT_MIN);
+		push_swap(head, INT_MIN, 0, 0);
 	else
 	{
 		while (ft_sorted(head->sa) == 0)

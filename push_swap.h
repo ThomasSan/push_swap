@@ -38,12 +38,24 @@ typedef	struct		s_shell
 **	Main functions
 */
 void				q_sort(t_shell *head);
-void				push_swap(t_shell *head, int x);
+void				push_swap(t_shell *head, int x, int len, int i);
 void				which_swap(t_shell *head);
+int					arr(int nb, int *array, int len);
+int					biggest_in_list(t_stack *list, int *array, int len, int x);
+int					*get_biggest(t_stack *list, int len, int x);
+/*
+**	Helpers functions
+*/
+void				sort_b_list(t_shell *head, int *biggest, int len);
+int					is_smallest(t_stack *list, int n);
+int					is_bigger(t_stack *list, int n, int min);
+void				rb_or_rr(t_shell *head);
+int					where_is_next(t_shell *head);
+void				while_smallest(t_shell *head);
 /*
 **	Median functions
 */
-int 				get_median(char **array, int ac);
+int					get_median(char **array, int ac);
 int					get_len(char **array, int ac);
 int					*fill_array2(t_stack *head, int len);
 int					*sort_array(int *array, int size);
