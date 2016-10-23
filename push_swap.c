@@ -113,8 +113,8 @@ void	sort_b_list(t_shell * head, int *biggest, int len)
 	{
 		if (is_in_array(head->sa->nb, biggest, len) && is_in_array(head->sa->n->nb, biggest, len) && head->sa->n->nb > head->sa->nb)
 			ft_ss(head, 1);
-		else
-			ft_sb(head, 1);
+		// else
+		// 	ft_sb(head, 1);
 	}
 }
 
@@ -145,17 +145,6 @@ void	rb_or_rr(t_shell *head)
 	else
 		ft_rb(head, 1);
 }
-
-void	which_swap(t_shell *head)
-{
-	if ((head->sb->nb > head->sb->n->nb) && (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min))
-		ft_ss(head, 1);
-	else if (head->sb->nb > head->sb->n->nb)
-		ft_sb(head, 1);
-	else if (head->sa->nb > head->sa->n->nb && head->sa->n->nb != head->min)
-		ft_sa(head, 1);
-}
-
 
 int		where_is_next(t_shell *head)
 {
@@ -272,6 +261,7 @@ void	push_swap(t_shell *h, int x)
 	// show_list(h);
 	if (x == INT_MIN)
 		push_swap(h, biggest[len-1]);
+	free(biggest);
 	while (h->sa->nb > l_nb(h->sa))
 		ft_ra(h, 1);
 }

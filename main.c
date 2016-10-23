@@ -36,24 +36,28 @@ int		main(int argc, char **argv)
 	int			i;
 
 	i = argc == 2 ? 0 : 1;
-	if (argc == 2)
+	if (argc == 2 && string_is_valid(argv[1]))
 		argv = ft_strsplit(argv[1], ' ');
 	if (argc == 1 || !(head = (t_shell*)malloc(sizeof(t_shell))))
 		return (0);
 	head->sa = NULL;
 	head->sb = NULL;
+	head->max = INT_MIN;
 	while (argv[i])
 	{
 		if (check_digit(argv[i]) == -1)
 			return (flush(head->sa, 0));
 		head->sa = push_back_stack2(head->sa, ft_atoi(argv[i]));
+		head->max = ft_atoi(argv[i]) > head->max ? ft_atoi(argv[i]) : head->max;
 		i++;
 	}
 	head->len = l_len(head->sa);
-	push_swap(head, INT_MIN);
+	which_swap(head);
 	// show_list(head);
 	free_lst(head);
 	if (argc == 2)
 		free_array(argv, head);
+	if (head)
+		free(head);
 	return (0);
 }

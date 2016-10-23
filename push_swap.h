@@ -39,6 +39,7 @@ typedef	struct		s_shell
 */
 void				q_sort(t_shell *head);
 void				push_swap(t_shell *head, int x);
+void				which_swap(t_shell *head);
 /*
 **	Median functions
 */
@@ -49,6 +50,7 @@ int					*sort_array(int *array, int size);
 /*
 **	Errors functions
 */
+int					string_is_valid(char *str);
 int					result(t_shell *head);
 long				ft_atol(char *s);
 int					check_digit(char *s);
